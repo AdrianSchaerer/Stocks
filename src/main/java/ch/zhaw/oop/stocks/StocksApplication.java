@@ -1,8 +1,12 @@
 package ch.zhaw.oop.stocks;
+import ch.zhaw.oop.stocks.api.StockService;
+import ch.zhaw.oop.stocks.api.StockValue;
+import ch.zhaw.oop.stocks.api.StockValueList;
 import ch.zhaw.oop.stocks.exporter.CsvExporter;
 import ch.zhaw.oop.stocks.stocks.Stock;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cglib.core.Local;
 import org.springframework.context.ConfigurableApplicationContext;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -26,10 +30,11 @@ public class StocksApplication {
 		ch.zhaw.oop.stocks.exporter.CsvExporter csvExporter = context.getBean(ch.zhaw.oop.stocks.exporter.CsvExporter.class);
 
 		// Create the stock object with placeholder data (could be received from Web API)
-		createStockObject(stock, LocalDate.of(2022, 1, 1), LocalDate.of(2023, 12, 31), "XYZ", 2000.0);
+		createStockObject(stock, LocalDate.of(2022, 1, 12), LocalDate.of(2022, 12, 31), "AAPL", 2000.0);
 
 		// Make the API call and update the stock object
 		makeAPICall(stock.getStartDate(), stock.getEndDate(), stock.getStockName(), stock);
+		System.out.println(stock);
 
 		// Calculate gain/loss value and update the stock object
 		calculateGainLoss(stock.getInvestValue(), stock.getFinalValue(), stock);
@@ -73,18 +78,31 @@ public class StocksApplication {
 	 */
 	private static void makeAPICall(LocalDate startDate, LocalDate endDate, String stockName, ch.zhaw.oop.stocks.stocks.Stock stock) throws Exception {
 		try {
-			// Placeholder implementation to simulate API call and retrieve startValue and endValue
-			double startValue = 100.0; // Placeholder value
-			double endValue = 150.0; // Placeholder value
+			// API Call to retrieve the value (close) between startDate and endDate
+			StockValueList stockValueList = StockService.time_series(stockName, startDate, endDate);
 
 			// Update the startValue and endValue in the Stock object
-			stock.setStartValue(startValue);
-			stock.setEndValue(endValue);
+			for (StockValue stockValue : stockValueList.getValues()) {
+				if (stockValue.getDatetime().equals(startDate)) {
+					stock.setStartValue(stockValue.getClose());
+					// to visualize the API call response
+					System.out.println("Startwert: " + stockValue.getClose());
+					System.out.println("Startdatum: " + startDate);
+				}
+				if (stockValue.getDatetime().equals(endDate.minusDays(1))) {
+					stock.setEndValue(stockValue.getClose());
+					// to visualize the API call response
+					System.out.println("Endwert: " + stockValue.getClose());
+					System.out.println("Enddatum: " + endDate.minusDays(1));
+				}
+			}
 		} catch(Exception e) {
 			// Handle exceptions
 			e.printStackTrace();
 			throw new Exception("Failed to make API call: " + e.getMessage());
-		} finally {System.out.println("API call successfully made. Data written to stock object.");}
+		} finally {
+			System.out.println("API call successfully made. Data written to stock object.");
+		}
 	}
 	/** FEM: Invokes an API call and returns its result.
 	 * @param investValue LocalDate start stock search period.
