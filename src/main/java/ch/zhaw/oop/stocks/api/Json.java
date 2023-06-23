@@ -4,16 +4,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-/*  Die Klasse Json aus der JSON-Java library wird für die Umwandlung von Json zu Javacode verwendet.
-    Diese können zu JSON object, array, number, string, boolean or null verwendet werden.
-    https://www.baeldung.com/java-org-json
-*/
+/**
+ *  <h1>Json</h1>
+ *  The Json class is used to parse Json to Java code using an ObjectMapper.
+ * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version     1.0
+ * @since       2023-06-23
+ */
 public class Json {
-
     private static final ObjectMapper objectMapper = getDefaultObjectMapper();
-
-    /* Die Klassenmethode erzeugt ein objectMapper
-    * defaultObjectMapper verhindert ein Fehler bei Json, welche nicht der Vorgabe entsprechen */
+    /**
+     * <p>The class method "getDefaultObjectMapper" creates a new instance of the ObjectMapper.</p>
+     * <p>This part of the application is not managed by Spring.</p>
+     * <p>ObjectMapper ist used to serialize Java objects into JSON and deserialize JSON string into Java objects.</p>
+     * <p>The class method prevents an error if the Json doesn't match the requirements needed.</p>
+     * @return ObjectMapper
+     */
     private static ObjectMapper getDefaultObjectMapper() {
         ObjectMapper defaultObjectMapper = new ObjectMapper();
         defaultObjectMapper.registerModule(new JavaTimeModule());
@@ -21,12 +27,22 @@ public class Json {
         return defaultObjectMapper;
     }
 
-    /* Die Methode parse wandelt ein Json zu einem Ojecttree */
+    /**
+     * @param src Json
+     * @return creating a Node from JSON String
+     * @throws JsonProcessingException
+     */
     public static JsonNode parse(String src) throws JsonProcessingException {
         return objectMapper.readTree(src);
     }
 
-    // Tree to Value mittels einer Klasse
+    /**
+     * @param node JsonNode
+     * @param clazz variable
+     * @param <A> there can be different classes to be mapped to
+     * @return converting Node to Java Object
+     * @throws JsonProcessingException
+     */
     public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
         return objectMapper.treeToValue(node, clazz);
     }
