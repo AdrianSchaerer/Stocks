@@ -4,7 +4,10 @@ import ch.zhaw.oop.stocks.stocks.Stock;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.opencsv.CSVWriter;
+
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CsvExporter {
 
     private final Stock stock;
+    private static final String CSV_EXPORT_DIRECTORY = "src/main/resources/csvexport/";
 
     @Value("src/main/resources/csvexport")
     private String csvExportDirectory;
@@ -70,5 +74,33 @@ public class CsvExporter {
             e.printStackTrace();
             throw new Exception("Failed to generate a CSV file: " + e.getMessage());
         } finally {System.out.println("CSV File generated.");}
+    }
+    public String exportStockData(Stock stock, String filename) throws IOException {
+        String filePath = CSV_EXPORT_DIRECTORY + filename;
+        File file = new File(filePath);
+
+        FileWriter writer = new FileWriter(file);
+        CSVWriter csvWriter = new CSVWriter(writer);
+
+        // Write the header
+        csvWriter.writeNext(new String[] { "startDate", "endDate", "stockName", "startValue", "endValue", "investValue", "finalValue", "gainLossValue" });
+
+        // Write the data row
+        csvWriter.writeNext(new String[] {
+                stock.getStartDate().toString(),
+                stock.getEndDate().toString(),
+                stock.getStockName(),
+                String.valueOf(stock.getStartValue()),
+                String.valueOf(stock.getEndValue()),
+                String.valueOf(stock.getInvestValue()),
+                String.valueOf(stock.getFinalValue()),
+                String.valueOf(stock.getGainLossValue())
+        });
+
+        csvWriter.close();
+        writer.close();
+
+        String fileUrl = "http://localhost:8080/csvexport/" + filename;
+        return fileUrl;
     }
 }

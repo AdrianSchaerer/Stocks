@@ -31,7 +31,26 @@ public class Stock {
     /**
      * FEM: Create a stock object. Fills the object with placeholder (default) data.
      */
+    public void setStockFromWeb(LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.stockName = stockName;
+        this.investValue = investValue;
+    }
+    public void setStockFromCSV(LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.stockName = stockName;
+        this.investValue = investValue;
+    }
+    public void setStockFromAPI(double startValue, double endValue) {
+        this.startValue = startValue;
+        this.endValue = endValue;
 
+        // Calculate finalValue and gainLossValue
+        this.finalValue = investValue / startValue * endValue;
+        this.gainLossValue = finalValue - investValue;
+    }
     public void createStockObject() {
         // Placeholder method to create a stock object
         startDate = LocalDate.of(0000, 0, 0);
@@ -43,71 +62,71 @@ public class Stock {
         finalValue = 0.0;
         gainLossValue = 0.0;
     }
-    // Getters and Setters
-    /** Method: Getter for the current startDate. */
+    // FEM: Getters and Setters
+    /** FEM: Getter for the current startDate. */
     public LocalDate getStartDate() {
         return startDate;
     }
-    /** Method: Setter for the current startDate. */
+    /** FEM: Setter for the current startDate. */
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
-    /** Method: Getter for the current endDate.  */
+    /** FEM: Getter for the current endDate.  */
     public LocalDate getEndDate() {
         return endDate;
     }
-    /** Method: Setter for the current endDate. */
+    /** FEM: Setter for the current endDate. */
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-    /** Method: Getter for the current stockName. */
+    /** FEM: Getter for the current stockName. */
     public String getStockName() {
         return stockName;
     }
-    /** Method: Setter for the current stockName. */
+    /** FEM: Setter for the current stockName. */
     public void setStockName(String stockName) {
         this.stockName = stockName;
     }
-    /** Method: Getter for the current startValue. */
+    /** FEM: Getter for the current startValue. */
     public double getStartValue() {
         return startValue;
     }
-    /** Method: Setter for the current startValue. */
+    /** FEM: Setter for the current startValue. */
     public void setStartValue(double startValue) {
         this.startValue = startValue;
     }
-    /** Method: Getter for the current endValue. */
+    /** FEM: Getter for the current endValue. */
     public double getEndValue() {
         return endValue;
     }
-    /** Method: Setter for the current endValue. */
+    /** FEM: Setter for the current endValue. */
     public void setEndValue(double endValue) {
         this.endValue = endValue;
     }
-    /** Method: Getter for the current investValue. */
+    /** FEM: Getter for the current investValue. */
     public double getInvestValue() {
         return investValue;
     }
-    /** Method: Setter for the current investValue.   */
+    /** FEM: Setter for the current investValue.   */
     public void setInvestValue(double investValue) {
         this.investValue = investValue;
     }
-    /** Method: Getter for the current finalValue. */
+    /** FEM: Getter for the current finalValue. */
     public double getFinalValue() {
         return finalValue;
     }
-    /** Method: Setter for the current finalValue.   */
+    /** FEM: Setter for the current finalValue.   */
     public void setFinalValue(double finalValue) {this.finalValue = finalValue;
     }
-    /** Method: Getter for the current gainLossValue. */
+    /** FEM: Getter for the current gainLossValue. */
     public double getGainLossValue() {
         return gainLossValue;
     }
-    /** Method: Setter for the current gainLossValue.   */
+    /** FEM: Setter for the current gainLossValue.   */
     public void setGainLossValue(double gainLossValue) {
         this.gainLossValue = gainLossValue;
     }
-    /** Method: Default toString Method. Converts all object data to String.
+    /** FEM: Default toString Method. Converts all object data to String.
      * @return Stock */
     @Override
     public String toString() {

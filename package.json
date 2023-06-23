@@ -1,0 +1,25 @@
+{
+  "name": "stocks",
+  "version": "1.0.0",
+  "description": "Stocks Application",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "start": "tsc --build && node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adrian Hauser, Dominic Troll, Manuel Ferretti",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "Stocks"
+  },
+  "keywords": [
+    "stocks"
+  ],
+  "devDependencies": {
+    "rimraf": "^5.0.1",
+    "tslint": "^6.1.3",
+    "typescript": "^5.1.3"
+  }
+}
