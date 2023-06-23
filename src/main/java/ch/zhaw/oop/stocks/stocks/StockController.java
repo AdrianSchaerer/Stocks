@@ -1,5 +1,6 @@
 package ch.zhaw.oop.stocks.stocks;
 
+import ch.zhaw.oop.stocks.api.ApiController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,14 +41,15 @@ public class StockController {
      * @return Stock data
      */
     @PostMapping("/stocks")
-    public Stock createStock(@RequestBody StockRequest request) {
+    public Stock createStock(@RequestBody StockRequest request) throws Exception {
         // FEM: Create the stock object using the data from the request
         Stock stock = new Stock();
         stock.setStockFromWeb(request.getStartDate(),request.getEndDate(),request.getStockName(),request.getInvestValue());
 
         // FEM: Make the API call to retrieve startValue and endValue. Return api results to stock object.
-//        ApiResult apiResult = makeAPICall(stock.getStartDate(), stock.getEndDate(), stock.getStockName());
-//        stock.setStockFromAPI(apiResult.getStartValue(),apiResult.getEndValue());
+        ApiController apiController = new ApiController();
+        apiController.makeAPICall(stock.getStartDate(), stock.getEndDate(), stock.getStockName(), stock);
+//        stock.setStockFromAPI(apiResult.getStartValue(),apiResult.getEndValue()); // Already done in APICall method
 
         // FEM: Perform additional processing or business logic
 

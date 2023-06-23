@@ -52,12 +52,7 @@ public class StocksApplication {
 		stock.setStockName(stockName);
 		stock.setInvestValue(investValue);
 	}
-	/** FEM: Invokes an API call and returns its result.
-	 * @param startDate LocalDate start stock search period.
-	 * @param endDate LocalDate end stock search period.
-	 * @param stockName String unique stock name identifier.
-	 * @param stock created stock object.
-	 */
+
 	private static void makeAPICall(LocalDate startDate, LocalDate endDate, String stockName, ch.zhaw.oop.stocks.stocks.Stock stock) throws Exception {
 		try {
 			// FEM: API Call to retrieve the value (close) between startDate and endDate
@@ -86,22 +81,7 @@ public class StocksApplication {
 			System.out.println("API call successfully made. Data written to stock object.");
 		}
 	}
-	/** FEM: Invokes an API call and returns its result.
-	 * @param investValue LocalDate start stock search period.
-	 * @param finalValue LocalDate end stock search period.
-	 * @param stock created stock object.
-	 */
-	private static void calculateGainLoss (double investValue, double finalValue, ch.zhaw.oop.stocks.stocks.Stock stock) throws Exception {
-		try {
-			double gainLossValue = finalValue - investValue;
-			// FEM: Update the gainLossValue in the Stock object
-			stock.setGainLossValue(gainLossValue);
-		} catch(Exception e) {
-			// FEM: Handle exceptions
-			e.printStackTrace();
-			throw new Exception("Failed to calculate gain or loss Value: " + e.getMessage());
-		} finally {System.out.println("gain or loss Value calculated.");}
-	}
+
 	/** FEM: Exports the stock object's data to a CSV file and returns a download url.
 	 * @param context Ensures that the application context from main method is used.
 	 * @param stock created stock object.
