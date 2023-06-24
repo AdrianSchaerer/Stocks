@@ -9,23 +9,27 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 
-/*  Die Klasse StockService bietet statische Methoden für HTTP GET Requests.
-
-    Attribute:
-    - HOSTNAME - wird in jedem Fall benötigt
-    - APIKEY - wird teilweise benötigt
-    Methoden:
-    - stocks()                          -> StockDescriptionList -> StockDescription
-    - earliest_timestamp(String symbol) -> StockEarliestTimestamp
-    - time_series (div..)               -> StockValueList -> StockValue
+/**
+ * <h1>StockService</h1>
+ * The class StockService contains some static methods to fetch data from the Stock API
+ * In this case the provider twelvedata is used.
+ * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version     1.0
+ * @since       2023-06-23
  */
-
 
 public class StockService {
 
     private static final String HOSTNAME =  "https://api.twelvedata.com/";
     private static final String APIKEY =    "1ee05fe17c2a42cfbbda5dd11e8fa496";
 
+    /**
+     * <p>stocks()</p>
+     * <p>This static method fetches a list of available stocks</p>
+     * @return object StockDescriptionList with a list of objects StockDescription
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static StockDescriptionList stocks() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(HOSTNAME+
@@ -39,6 +43,14 @@ public class StockService {
         return Json.fromJson(node, StockDescriptionList.class);
     }
 
+    /**
+     * <p>earliest_timestamp()</p>
+     * <p>This static method fetches the date since when the specific stock is traded on the market.</p>
+     * @param symbol of the stock
+     * @return object StockEarliestTimestamp
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static StockEarliestTimestamp earliest_timestamp(String symbol) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(HOSTNAME +
@@ -54,6 +66,16 @@ public class StockService {
         return Json.fromJson(node, StockEarliestTimestamp.class);
     }
 
+    /**
+     * <p>time_series()</p>
+     * <p>This static method fetches data in between a start and an end date of a specific stock.</p>
+     * @param symbol of the stock
+     * @param startDate start date
+     * @param endDate end date
+     * @return object StockValueList which contains a list of StockValues
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public static StockValueList time_series(String symbol, LocalDate startDate, LocalDate endDate) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(HOSTNAME +

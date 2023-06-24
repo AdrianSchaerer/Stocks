@@ -2,6 +2,13 @@ package ch.zhaw.oop.stocks.api;
 
 import java.time.LocalDate;
 
+/**
+ * <h1>StockValue</h1>
+ * <p>This class represents the model for data of the stock of a specific day</p>
+ * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version     1.0
+ * @since       2023-06-23
+ */
 public class StockValue {
 
     private LocalDate datetime;

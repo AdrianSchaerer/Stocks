@@ -1,14 +1,21 @@
 package ch.zhaw.oop.stocks.api;
 
+/**
+ * <h1>StockDescription</h1>
+ * <p>This class represents the model for stocks.</p>
+ * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version     1.0
+ * @since       2023-06-23
+ */
 public class StockDescription {
 
-    private String symbol;      //:"AACG"
-    private String name;        //:"ATA Creativity Global"
-    private String currency;    //:"USD"
-    private String exchange;    //:"NASDAQ"
-    private String mic_code;    //:"XNMS"
-    private String country;     //:"United States"
-    private String type;        //:"Depositary Receipt"
+    private String symbol;      //"AACG"
+    private String name;        //"ATA Creativity Global"
+    private String currency;    //"USD"
+    private String exchange;    //"NASDAQ"
+    private String mic_code;    //"XNMS"
+    private String country;     //"United States"
+    private String type;        //"Depositary Receipt"
 
     public String getSymbol() {
         return symbol;
