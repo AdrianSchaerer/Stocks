@@ -1,0 +1,21 @@
+Hostpoint MySQL DB
+
+internal Hostname:
+    itifuput.mysql.db.internal
+
+external Hostname:
+    itifuput.mysql.db.hostpoint.ch
+
+DB-name:
+    itifuput_stockproject
+
+MySQL-Version:
+    10.6-MariaDB
+
+phpMyAdmin:
+    https://admin.hostpoint.ch/phpmyadmin2/auth/hpsignon.php?lang=de&server_id=2166&db=itifuput_stockproject&do_autologin=0&server=mysql32j15.db.hostpoint.internal&time=1687686204.15
+User:
+    itifuput_admin
+
+PW:
+    ZHAW2023project
