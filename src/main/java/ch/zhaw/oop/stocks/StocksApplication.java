@@ -37,7 +37,7 @@ public class StocksApplication {
 		String downloadUrl = exportStockDataToCSV(stock, context);
 		System.out.println("Stock data exported to CSV file. Download URL: " + downloadUrl);
 
-		context.close();
+	//	context.close();
 	}
 	/** FEM: Creates a new Stock object. The parameters may be passed over from other methods.
 	 * @param stock new stock object to be created.
