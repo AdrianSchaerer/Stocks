@@ -29,6 +29,7 @@ public class StockController {
      * Maps the GET Request to /stock to the stock object (@GetMapping annotation).
      * Also converts it to appropriate form (@ResponseBody annotation).
      */
+    @CrossOrigin
     @GetMapping("/stocks")
     @ResponseBody
     public Stock getStock() {

@@ -13,9 +13,9 @@ MySQL-Version:
     10.6-MariaDB
 
 phpMyAdmin:
-    https://admin.hostpoint.ch/phpmyadmin2/auth/hpsignon.php
-User:
-    itifuput_admin
-
-PW:
-    ZHAW2023project
+    Admin-Center:
+        https://admin.hostpoint.ch/phpmyadmin2/auth/hpsignon.php
+    User:
+        itifuput_admin
+    PW:
+        ZHAW2023project

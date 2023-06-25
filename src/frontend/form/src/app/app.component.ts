@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators, ɵFormGroupValue, ɵTypedOrUntyped} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class AppComponent implements OnInit{
   title = 'ReactiveForms';
   reactiveForm: FormGroup;
+  private serializedForm: any;
+  private json: ɵTypedOrUntyped<any, ɵFormGroupValue<any>, any>;
+
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit() {
     this.reactiveForm = new FormGroup({
@@ -20,7 +26,22 @@ export class AppComponent implements OnInit{
     });
   }
 
-  onSubmit() {
-    console.log(this.reactiveForm);
-  }
+ // onSubmit() {
+   // console.log(this.reactiveForm.value);
+
+
+    onSubmit() {
+      const formData: any = new FormData();
+      formData.append('investValue', this.reactiveForm.get('investValue').value);
+      formData.append('startDate', this.reactiveForm.get('startDate').value);
+      formData.append('endDate', this.reactiveForm.get('endDate').value);
+      formData.append('stockName', this.reactiveForm.get('stockName').value);
+      JSON.stringify(formData);
+      this.http
+        .post('http://localhost:8080/stocks', formData)
+        .subscribe({
+          next: (response) => console.log(response),
+          error: (error) => console.log(error),
+        });
+    }
 }
