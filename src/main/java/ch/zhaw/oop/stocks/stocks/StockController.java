@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
  */
+// TRD: Added Cors Handling
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class StockController {
@@ -30,6 +31,7 @@ public class StockController {
      * Maps the GET Request to /stock to the stock object (@GetMapping annotation).
      * Also converts it to appropriate form (@ResponseBody annotation).
      */
+    // TRD: Added Cors Handling
     @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/stocks")
     @ResponseBody
@@ -42,6 +44,7 @@ public class StockController {
      * @param request Stock Data as JSON from frontend, using the StockRequest class
      * @return Stock data
      */
+    // TRD: Added Cors Handling
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/stocks")
     public Stock createStock(@RequestBody StockRequest request) throws Exception {
