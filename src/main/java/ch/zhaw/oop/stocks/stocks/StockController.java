@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 0.1
  */
 // TRD: Added Cors Handling
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class StockController {
 
@@ -32,7 +32,7 @@ public class StockController {
      * Also converts it to appropriate form (@ResponseBody annotation).
      */
     // TRD: Added Cors Handling
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/stocks")
     @ResponseBody
     public Stock getStock() {
