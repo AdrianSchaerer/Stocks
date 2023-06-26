@@ -27,21 +27,21 @@ export class AppComponent implements OnInit{
   }
 
  // onSubmit() {
-   // console.log(this.reactiveForm.value);
+    // console.log(this.reactiveForm.value);
 
+  onSubmit() {
+    const formData: any = new FormData();
+    formData.append('investValue', this.reactiveForm.get('investValue').value);
+    formData.append('startDate', this.reactiveForm.get('startDate').value);
+    formData.append('endDate', this.reactiveForm.get('endDate').value);
+    formData.append('stockName', this.reactiveForm.get('stockName').value);
+    JSON.stringify(formData);
+    this.http
+      .post('http://localhost:8080/stocks', formData)
+      .subscribe({
+        next: (response) => console.log(response),
+        error: (error) => console.log(error),
+      });
 
-    onSubmit() {
-      const formData: any = new FormData();
-      formData.append('investValue', this.reactiveForm.get('investValue').value);
-      formData.append('startDate', this.reactiveForm.get('startDate').value);
-      formData.append('endDate', this.reactiveForm.get('endDate').value);
-      formData.append('stockName', this.reactiveForm.get('stockName').value);
-      JSON.stringify(formData);
-      this.http
-        .post('http://localhost:8080/stocks', formData)
-        .subscribe({
-          next: (response) => console.log(response),
-          error: (error) => console.log(error),
-        });
     }
 }
