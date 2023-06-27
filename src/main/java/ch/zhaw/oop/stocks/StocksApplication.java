@@ -1,4 +1,5 @@
 package ch.zhaw.oop.stocks;
+import ch.zhaw.oop.stocks.api.ApiController;
 import ch.zhaw.oop.stocks.api.StockService;
 import ch.zhaw.oop.stocks.api.StockValue;
 import ch.zhaw.oop.stocks.api.StockValueList;
@@ -31,7 +32,9 @@ public class StocksApplication {
 		/* FEM: Create the stock object with placeholder data.
 		*  Needs to be im place or nullpointer-exception occurs tue to missing data.
 		*/
-		createStockObject(stock, LocalDate.of(2022, 1, 12), LocalDate.of(2022, 12, 31), "AAPL", 2000.0);
+		createStockObject(stock, LocalDate.of(2022, 1, 2), LocalDate.of(2023, 1, 1), "AAPL", 2000.0);
+		// SCA: To test the calculation of finalValue, gainLossValue
+		makeAPICall(stock.getStartDate(), stock.getEndDate(), stock.getStockName(), stock);
 
 		// FEM: Export stock data to CSV and get the download URL
 		String downloadUrl = exportStockDataToCSV(stock, context);
@@ -73,6 +76,17 @@ public class StocksApplication {
 					System.out.println("Enddatum: " + endDate.minusDays(1));
 				}
 			}
+			// SCA: Adding the finalValue up to two digits after comma and gainLossValue
+			if (stock.getStartValue() == 0) {
+				System.err.println("Division by zero. StartValue: " + stock.getStartValue());
+			} else {
+				stock.setGainLossValue(stock.getEndValue()/ stock.getStartValue());
+				System.out.println("gainLossValue: "+stock.getGainLossValue());
+				stock.setEndValue(stock.getInvestValue()*stock.getGainLossValue());
+				stock.setEndValue(Math.round(stock.getEndValue()*100.0)/100.0);
+				System.out.println("finalValue: "+stock.getEndValue());
+			}
+
 		} catch(Exception e) {
 			// FEM: Handle exceptions
 			e.printStackTrace();

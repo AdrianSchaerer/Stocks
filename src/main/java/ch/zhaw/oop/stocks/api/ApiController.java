@@ -38,11 +38,22 @@ public class ApiController {
                     System.out.println("Enddatum: " + endDate.minusDays(1));
                 }
             }
+            // SCA: Adding the finalValue up to two digits after comma and gainLossValue
+            if (stock.getStartValue() == 0) {
+                System.err.println("Division by zero. StartValue: " + stock.getStartValue());
+            } else {
+                stock.setGainLossValue(stock.getEndValue()/ stock.getStartValue());
+                System.out.println("gainLossValue: "+stock.getGainLossValue());
+                stock.setEndValue(stock.getInvestValue()*stock.getGainLossValue());
+                stock.setEndValue(Math.round(stock.getEndValue()*100.0)/100.0);
+                System.out.println("finalValue: "+stock.getEndValue());
+            }
         } catch(Exception e) {
             // FEM: Handle exceptions
             e.printStackTrace();
             throw new Exception("Failed to make API call: " + e.getMessage());
         } finally {
+            //ToDo SCA: Attention: finally will be executed even if an exception is thrown!
             System.out.println("API call successfully made. Data written to stock object.");
         }
     }
