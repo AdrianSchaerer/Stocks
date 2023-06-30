@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @version     1.0
  * @since       2023-06-23
  */
-public class StockEarliestTimestamp {
+public class ApiStockEarliestTimestamp {
 
     private LocalDate datetime;
     private int unix_time;

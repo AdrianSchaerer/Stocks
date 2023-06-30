@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @version     1.0
  * @since       2023-06-23
  */
-public class StockValue {
+public class ApiStockValue {
 
     private LocalDate datetime;
     private double open;

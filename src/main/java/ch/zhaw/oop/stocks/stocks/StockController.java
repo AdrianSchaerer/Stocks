@@ -1,10 +1,6 @@
 package ch.zhaw.oop.stocks.stocks;
 
-import ch.zhaw.oop.stocks.api.ApiController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,14 +14,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class StockController {
 
-    private final ch.zhaw.oop.stocks.stocks.Stock stock;
+    private Stock stock;
+    private final StockService stockService;
     /**
      * FEM: Constructor for the stock controller
      * Autoinjects stock when controller instance is created.
      * Provides proper initialization with required stock dependency.
      */
+    // ADR: Added DI for StockService
     @Autowired
-    public StockController(ch.zhaw.oop.stocks.stocks.Stock stock) {this.stock = stock;}
+    public StockController(Stock stock, StockService stockService) {
+        this.stock = stock;
+        this.stockService = stockService;
+    }
     /**
      * FEM: Placeholder HTTP GET Mapping
      * Maps the GET Request to /stock to the stock object (@GetMapping annotation).
@@ -47,17 +48,23 @@ public class StockController {
     // TRD: Added Cors Handling
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/stocks")
-    public Stock createStock(@RequestBody StockRequest request) throws Exception {
+    public Stock createStock(@RequestBody StockRequest request){
         // FEM: Create the stock object using the data from the request
+        // ADR: used the injected stock object and returned
         stock.setStockFromWeb(request.getStartDate(),request.getEndDate(),request.getStockName(),request.getInvestValue());
 
         // FEM: Make the API call to retrieve startValue and endValue. Return api results to stock object.
-        ApiController apiController = new ApiController();
-        apiController.makeAPICall(stock.getStartDate(), stock.getEndDate(), stock.getStockName(), stock);
-//        stock.setStockFromAPI(apiResult.getStartValue(),apiResult.getEndValue()); // Already done in APICall method
+        // ADR: DI the apiController in the constructor
+        // ADR: We send the stock object to be completed by stockService and sent back here to be returned afterward
+        try {
+            stock = stockService.makeAPICall(stock);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         // FEM: Perform additional processing or business logic
 
+        // ADR: Added return stock which is now complete with all data
         return stock;
     }
 

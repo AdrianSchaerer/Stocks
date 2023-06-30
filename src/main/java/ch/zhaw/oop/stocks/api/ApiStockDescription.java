@@ -7,7 +7,7 @@ package ch.zhaw.oop.stocks.api;
  * @version     1.0
  * @since       2023-06-23
  */
-public class StockDescription {
+public class ApiStockDescription {
 
     private String symbol;      //"AACG"
     private String name;        //"ATA Creativity Global"

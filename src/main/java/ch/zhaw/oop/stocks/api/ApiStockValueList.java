@@ -10,12 +10,12 @@ import java.util.List;
  * @version     1.0
  * @since       2023-06-23
  */
-public class StockValueList {
+public class ApiStockValueList {
 
 //    private String meta;
-    private List<StockValue> values;
+    private List<ApiStockValue> values;
 
-    public List<StockValue> getValues() {
+    public List<ApiStockValue> getValues() {
         return values;
     }
 }

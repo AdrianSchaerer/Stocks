@@ -10,11 +10,11 @@ import java.util.List;
  * @version     1.0
  * @since       2023-06-23
  */
-public class StockDescriptionList {
+public class ApiStockDescriptionList {
 
-    private List<StockDescription> data;
+    private List<ApiStockDescription> data;
 
-    public List<StockDescription> getData() {
+    public List<ApiStockDescription> getData() {
         return data;
     }
 
