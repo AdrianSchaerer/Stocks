@@ -32,13 +32,13 @@ public class StocksApplication {
 		/* FEM: Create the stock object with placeholder data.
 		*  Needs to be im place or nullpointer-exception occurs tue to missing data.
 		*/
-		createStockObject(stock, LocalDate.of(2022, 1, 2), LocalDate.of(2023, 1, 1), "AAPL", 2000.0);
+//		createStockObject(stock, LocalDate.of(2022, 1, 2), LocalDate.of(2023, 1, 1), "AAPL", 2000.0);
 		// SCA: To test the calculation of finalValue, gainLossValue
-		makeAPICall(stock.getStartDate(), stock.getEndDate(), stock.getStockName(), stock);
+//		makeAPICall(stock.getStartDate(), stock.getEndDate(), stock.getStockName(), stock);
 
 		// FEM: Export stock data to CSV and get the download URL
-		String downloadUrl = exportStockDataToCSV(stock, context);
-		System.out.println("Stock data exported to CSV file. Download URL: " + downloadUrl);
+//		String downloadUrl = exportStockDataToCSV(stock, context);
+//		System.out.println("Stock data exported to CSV file. Download URL: " + downloadUrl);
 
 	//	context.close();
 	}

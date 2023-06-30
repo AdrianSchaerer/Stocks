@@ -49,7 +49,6 @@ public class StockController {
     @PostMapping("/stocks")
     public Stock createStock(@RequestBody StockRequest request) throws Exception {
         // FEM: Create the stock object using the data from the request
-        Stock stock = new Stock();
         stock.setStockFromWeb(request.getStartDate(),request.getEndDate(),request.getStockName(),request.getInvestValue());
 
         // FEM: Make the API call to retrieve startValue and endValue. Return api results to stock object.

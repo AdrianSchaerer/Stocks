@@ -12,42 +12,34 @@ public class ApiController {
 
     @Autowired
     public ApiController() { }
-/* FEM: API Call method.
- * @param startDate LocalDate start stock search period.
- * @param endDate LocalDate end stock search period.
- * @param stockName String unique stock name identifier.
- * @param stock created stock object.
- */
+    /* FEM: API Call method.
+     * @param startDate LocalDate start stock search period.
+     * @param endDate LocalDate end stock search period.
+     * @param stockName String unique stock name identifier.
+     * @param stock created stock object.
+     */
     public void makeAPICall(LocalDate startDate, LocalDate endDate, String stockName, ch.zhaw.oop.stocks.stocks.Stock stock) throws Exception {
         try {
+            double startValue = 0;
+            double endValue = 0;
             // FEM: API Call to retrieve the value (close) between startDate and endDate
             StockValueList stockValueList = StockService.time_series(stockName, startDate, endDate);
-
             // FEM: Update the startValue and endValue in the Stock object
             for (StockValue stockValue : stockValueList.getValues()) {
                 if (stockValue.getDatetime().equals(startDate)) {
-                    stock.setStartValue(stockValue.getClose());
+                    startValue = stockValue.getClose();
                     // FEM: to visualize the API call response
-                    System.out.println("Startwert: " + stockValue.getClose());
-                    System.out.println("Startdatum: " + startDate);
+                    System.out.println("API Startwert: " + stockValue.getClose());
+                    System.out.println("API Startdatum: " + startDate);
                 }
                 if (stockValue.getDatetime().equals(endDate.minusDays(1))) {
-                    stock.setEndValue(stockValue.getClose());
+                    endValue = stockValue.getClose();
                     // FEM: to visualize the API call response
-                    System.out.println("Endwert: " + stockValue.getClose());
-                    System.out.println("Enddatum: " + endDate.minusDays(1));
+                    System.out.println("API Endwert: " + stockValue.getClose());
+                    System.out.println("API Enddatum: " + endDate.minusDays(1));
                 }
             }
-            // SCA: Adding the finalValue up to two digits after comma and gainLossValue
-            if (stock.getStartValue() == 0) {
-                System.err.println("Division by zero. StartValue: " + stock.getStartValue());
-            } else {
-                stock.setGainLossValue(stock.getEndValue()/ stock.getStartValue());
-                System.out.println("gainLossValue: "+stock.getGainLossValue());
-                stock.setEndValue(stock.getInvestValue()*stock.getGainLossValue());
-                stock.setEndValue(Math.round(stock.getEndValue()*100.0)/100.0);
-                System.out.println("finalValue: "+stock.getEndValue());
-            }
+            stock.setStockFromAPI(startValue, endValue);
         } catch(Exception e) {
             // FEM: Handle exceptions
             e.printStackTrace();

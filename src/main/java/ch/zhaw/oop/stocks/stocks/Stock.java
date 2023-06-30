@@ -26,7 +26,16 @@ public class Stock {
     private String stockName;
     private double startValue, endValue, investValue, finalValue, gainLossValue;
 
-    // Getters and setters
+    public Stock() {
+        this.startDate = LocalDate.of(1900, 01, 01);
+        this.endDate = LocalDate.of(2999, 01, 01);;
+        this.stockName = "Default";
+        this.startValue = 0.0;
+        this.endValue = 0.0;
+        this.investValue = 0.0;
+        this.finalValue = 0.0;
+        this.gainLossValue = 0.0;
+    }
 
     /**
      * FEM: Create a stock object. Fills the object with placeholder (default) data.
@@ -36,6 +45,12 @@ public class Stock {
         this.endDate = endDate;
         this.stockName = stockName;
         this.investValue = investValue;
+
+        //FEM: Print-Out for better analysis:
+        System.out.println("Start-Datum von Web-Eingabe: " + startDate);
+        System.out.println("End-Datum von Web-Eingabe: " + endDate);
+        System.out.println("Stock Name von Web-Eingabe: " + stockName);
+        System.out.println("Investierter Betrag von Web-Eingabe: " + investValue);
     }
     public void setStockFromCSV(LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
         this.startDate = startDate;
@@ -47,9 +62,32 @@ public class Stock {
         this.startValue = startValue;
         this.endValue = endValue;
 
-        // Calculate finalValue and gainLossValue
-        this.finalValue = investValue / startValue * endValue;
-        this.gainLossValue = finalValue - investValue;
+        // Calculate finalValue
+        try {
+            if (startValue != 0) {
+                this.finalValue = investValue / startValue * endValue;
+            } else {
+                throw new ArithmeticException("Division by zero error for finalValue calculation");
+            }
+        } catch (ArithmeticException e) {
+            // Handle the division by zero error for finalValue calculation
+            this.finalValue = 0;
+            System.err.println("Error calculating finalValue: " + e.getMessage());
+        }
+
+        // Calculate gainLossValue
+        try {
+            this.gainLossValue = finalValue - investValue;
+        } catch (Exception e) {
+            // Handle any other exception that may occur during the calculation of gainLossValue
+            this.gainLossValue = 0;
+            System.err.println("Error calculating gainLossValue: " + e.getMessage());
+        }
+        //FEM: Print-Out for better analysis:
+        System.out.println("Start-Wert von API: " + startValue);
+        System.out.println("End-Wert von API: " + endValue);
+        System.out.println("Berechneter finaler Wert: " + finalValue);
+        System.out.println("Berechneter Verlust oder Gewinn: " + gainLossValue);
     }
     public void createStockObject() {
         // Placeholder method to create a stock object
