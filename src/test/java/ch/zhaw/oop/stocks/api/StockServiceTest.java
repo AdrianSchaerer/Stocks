@@ -1,7 +1,6 @@
 package ch.zhaw.oop.stocks.api;
 
-import ch.zhaw.oop.stocks.pojo.EarliestTimestampPOJO;
-import ch.zhaw.oop.stocks.pojo.StockValueListPOJO;
+import ch.zhaw.oop.stocks.pojo.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
@@ -71,9 +70,9 @@ class StockServiceTest {
     @Test
     void stocks() throws JsonProcessingException {
         JsonNode node = Json.parse(stocksSource);
-        StockDescriptionList pojo = Json.fromJson(node, StockDescriptionList.class);
+        StockDescriptionListPOJO pojo = Json.fromJson(node, StockDescriptionListPOJO.class);
         String symbol = "";
-        for (StockDescription bP : pojo.getData()) {
+        for (StockDescriptionPOJO bP : pojo.getData()) {
             if(bP.getSymbol().equals("AACI")){
                 symbol = bP.getSymbol();
             }
@@ -92,7 +91,7 @@ class StockServiceTest {
     void time_series() throws JsonProcessingException {
         JsonNode node = Json.parse(time_seriesSource);
         StockValueListPOJO pojo = Json.fromJson(node, StockValueListPOJO.class);
-        for (StockValue stockValue : pojo.getValues()) {
+        for (StockValuePOJO stockValue : pojo.getValues()) {
             if (stockValue.getDatetime().equals(startDate)) {
                 assertEquals("2020-05-06",stockValue.getDatetime().toString());
                 assertEquals(75.16000,stockValue.getClose());

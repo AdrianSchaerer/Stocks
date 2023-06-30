@@ -53,11 +53,19 @@ public class StockController {
         // ADR: used the injected stock object and returned
         stock.setStockFromWeb(request.getStartDate(),request.getEndDate(),request.getStockName(),request.getInvestValue());
 
+        // ADR: To Test -> Info from User
+        System.out.println("Web: Startdatum:    "+stock.getStartDate());
+        System.out.println("Web: Enddatum:      "+stock.getEndDate());
         // FEM: Make the API call to retrieve startValue and endValue. Return api results to stock object.
         // ADR: DI the apiController in the constructor
         // ADR: We send the stock object to be completed by stockService and sent back here to be returned afterward
         try {
             stock = stockService.makeAPICall(stock);
+            // ADR: To Test -> the dates are checked (no weekends or holidays are possible)
+            System.out.println("API: Startdatum:    "+stock.getStartDate());
+            System.out.println("API: StartValue:    "+stock.getStartValue());
+            System.out.println("API: Enddatum:      "+stock.getEndDate());
+            System.out.println("API: EndValue:      "+stock.getEndValue());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

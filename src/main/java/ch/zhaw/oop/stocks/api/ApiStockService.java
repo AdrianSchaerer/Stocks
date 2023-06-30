@@ -13,8 +13,8 @@ import java.net.http.HttpResponse;
 import java.time.LocalDate;
 
 /**
- * <h1>StockService</h1>
- * The class StockService contains some static methods to fetch data from the Stock API
+ * <h1>ApiStockService</h1>
+ * The class ApiStockService contains some methods to fetch data from the web API
  * In this case the provider twelvedata is used.
  * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version     1.0
@@ -32,7 +32,7 @@ public class ApiStockService {
     }
     /**
      * <p>stocks()</p>
-     * <p>This static method fetches a list of available stocks</p>
+     * <p>This method fetches a list of available stocks</p>
      * @return object ApiDescriptionList with a list of objects StockDescription
      */
     public ApiStockDescriptionList stocks(){
@@ -52,8 +52,8 @@ public class ApiStockService {
     }
 
     /**
-     * <p>earliest_timestamp()</p>
-     * <p>This static method fetches the date since when the specific stock is traded on the market.</p>
+     * <p>earliestTimestamp()</p>
+     * <p>This method fetches the date since when the specific stock is traded on the market.</p>
      * @param symbol of the stock
      * @return object StockEarliestTimestamp
      */
@@ -76,8 +76,8 @@ public class ApiStockService {
     }
 
     /**
-     * <p>time_series()</p>
-     * <p>This static method fetches data in between a start and an end date of a specific stock.</p>
+     * <p>timeSeries(...)</p>
+     * <p>This method fetches data in between a start and an end date of a specific stock.</p>
      * @param symbol of the stock
      * @param startDate start date
      * @param endDate end date
@@ -87,12 +87,12 @@ public class ApiStockService {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(HOSTNAME +
                         "time_series" +
-                        "?start_date=" + startDate +
+                        "?start_date=" + startDate.minusDays(10) +
                         "&symbol=" + symbol +
                         "&interval=1day" +
                         "&type=stock" +
                         "&apikey=" + APIKEY +
-                        "&end_date=" + endDate.plusDays(1)))
+                        "&end_date=" + endDate.plusDays(10)))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         JsonNode node = makeHttpRequest(request);
@@ -103,6 +103,7 @@ public class ApiStockService {
         }
     }
 
+    // ToDo: will this be used? otherwise we can delete it.
     private JsonNode makeHttpRequest(HttpRequest request) {
         HttpResponse<String> response = null;
         try {
