@@ -1,3 +1,4 @@
+
 <div class="form">
   <h2>Investment Calculator</h2>
   <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
@@ -73,3 +74,25 @@
     <input type="submit" id="submit" name="stockValue">
   </form>
 </div>
+
+<div *ngIf="apiResponse">
+  <h2>Response From API</h2>
+  <pre>{{ apiResponse | json }}</pre>
+</div>
+
+<div *ngIf="apiResponse">
+  <h2>Response Data</h2>
+  <pre>{{ apiResponse | json }}</pre>
+
+  <h3>Extracted Values:</h3>
+  <p>Start Date: {{ startDate }}</p>
+  <p>End Date: {{ endDate }}</p>
+  <p>Stock Name: {{ stockName }}</p>
+  <p>Start Value: {{ startValue }}</p>
+  <p>End Value: {{ endValue }}</p>
+  <p>Invest Value: {{ investValue }}</p>
+  <p>Final Value: {{ finalValue }}</p>
+  <p>Gain/Loss Value: {{ gainLossValue }}</p>
+</div>
+
+<button (click)="downloadFile()">Download File</button>
