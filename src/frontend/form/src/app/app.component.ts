@@ -112,15 +112,22 @@ export class AppComponent implements OnInit {
         (response: string) => {
           // Handle successful response here
           console.log('CSV file URL:', response);
-          // You can open the CSV file in a new window/tab using the URL received in the response.
-          // For example:
-          // window.open(response);
+          this.downloadFile(response);
         },
         (error: any) => {
           // Handle error response here
           console.error('Error exporting stock data:', error);
         }
       );
+  }
+
+  private downloadFile(url: string): void {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = url.substring(url.lastIndexOf('/') + 1);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
 

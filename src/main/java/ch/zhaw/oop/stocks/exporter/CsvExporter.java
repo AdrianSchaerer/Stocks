@@ -24,9 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CsvExporter {
 
     private final Stock stock;
-    private static final String CSV_EXPORT_DIRECTORY = "src/main/resources/csvexport/";
+    private static final String CSV_EXPORT_DIRECTORY = "src/frontend/form/src/assets/csvexport/";
 
-    @Value("src/main/resources/csvexport")
+    @Value("src/frontend/form/src/assets/csvexport/")
     private String csvExportDirectory;
     /** FEM: Constructor for the CsvExporter
      *  Autoinjects stock when CsvExporter instance is created.
@@ -40,42 +40,7 @@ public class CsvExporter {
      *  Gets the stock data and writes it to a CSV file.
      *  @return CSV File path (String)
      */
-    public String exportToCSV() throws Exception {
-        // Prepare the CSV file name
-        try {
-            String fileName = stock.getStartDate() + "_" +
-                    stock.getEndDate() + "_" +
-                    stock.getStockName() + "_" +
-                    stock.getInvestValue() + ".csv";
-
-            // Create the file path
-            Path filePath = Path.of(csvExportDirectory, fileName);
-
-            // Create a CSVWriter
-            try (CSVWriter writer = new CSVWriter(new FileWriter(filePath.toFile()))) {
-                // Write header
-                writer.writeNext(new String[]{"Start Date", "End Date", "Stock Name", "Invest Value"});
-
-                // Write data
-                writer.writeNext(new String[]{
-                        stock.getStartDate().toString(),
-                        stock.getEndDate().toString(),
-                        stock.getStockName(),
-                        String.valueOf(stock.getInvestValue())
-                });
-            }
-
-            // Return the download URL
-
-            return "/csvexport/" + fileName;
-
-        } catch(Exception e) {
-            // Handle exceptions
-            e.printStackTrace();
-            throw new Exception("Failed to generate a CSV file: " + e.getMessage());
-        } finally {System.out.println("CSV File generated.");}
-    }
-    public String exportStockData(Stock stock, String filename) throws IOException {
+        public String exportStockData(Stock stock, String filename) throws IOException {
         String filePath = CSV_EXPORT_DIRECTORY + filename;
         File file = new File(filePath);
 
@@ -100,7 +65,7 @@ public class CsvExporter {
         csvWriter.close();
         writer.close();
 
-        String fileUrl = "http://localhost:8080/csvexport/" + filename;
+        String fileUrl = "http://localhost:4200/assets/csvexport/" + filename;
         return fileUrl;
     }
 }
