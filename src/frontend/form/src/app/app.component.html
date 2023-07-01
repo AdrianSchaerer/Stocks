@@ -89,7 +89,8 @@
   <p>Final Value: {{ finalValue }}</p>
   <p>Gain/Loss Value: {{ gainLossValue }}</p>
 
-  <button onClick="window.location.reload();">Start Over</button>
+
+  <button (click)="refreshPage()">Start Over</button>
 <br>
   <br>
   <button (click)="exportStockData()">Export CSV</button>
