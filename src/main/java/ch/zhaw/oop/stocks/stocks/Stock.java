@@ -65,7 +65,7 @@ public class Stock {
         // Calculate finalValue
         try {
             if (startValue != 0) {
-                this.finalValue = investValue / startValue * endValue;
+                this.finalValue = (Math.round(investValue / startValue * endValue * 100.0)/100.0);
             } else {
                 throw new ArithmeticException("Division by zero error for finalValue calculation");
             }
@@ -77,7 +77,7 @@ public class Stock {
 
         // Calculate gainLossValue
         try {
-            this.gainLossValue = finalValue - investValue;
+            this.gainLossValue = (Math.round(finalValue - investValue * 100.0)/100.0);
         } catch (Exception e) {
             // Handle any other exception that may occur during the calculation of gainLossValue
             this.gainLossValue = 0;
