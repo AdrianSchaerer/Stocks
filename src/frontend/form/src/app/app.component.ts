@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { saveAs } from 'file-saver';
 
 
-
+// TRD: root component of the application
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+// TRD: implements OnInit interface to initialize the component with a form
 export class AppComponent implements OnInit {
   title = 'ReactiveForms';
   reactiveForm: FormGroup;
@@ -24,11 +25,11 @@ export class AppComponent implements OnInit {
   gainLossValue: number;
 
 
-
+// TRD: inject the HttpClient service
   constructor(private http: HttpClient) {}
 
 
-
+// TRD: In this method, we initialize the reactiveForm property with a new instance of the FormGroup class.
   ngOnInit() {
     this.reactiveForm = new FormGroup({
       investValue: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('[0-9]*')]),
@@ -39,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
 
-
+// TRD: The onSubmit method is a function that is called when the form is submitted.
   onSubmit() {
     const formData = {
       investValue: this.reactiveForm.get('investValue').value,
@@ -60,6 +61,7 @@ export class AppComponent implements OnInit {
       });
      **/
 
+    // TRD: Make the POST Call to the backend to get the data from the API.
     this.http
       .post('http://localhost:8080/stocks', formData)
       .subscribe(
@@ -73,6 +75,7 @@ export class AppComponent implements OnInit {
       );
   }
 
+  // TRD: Extract the values from the response object and stores them in the component properties.
   private extractValues(response: any) {
     this.startDate = response.startDate;
     this.endDate = response.endDate;
@@ -104,7 +107,7 @@ export class AppComponent implements OnInit {
      **/
 
   }
-
+// FEM: Export the stock data to a CSV file
   exportStockData(): void {
     const apiUrl = 'http://localhost:8080/exporter/export';
     this.http.post(apiUrl, {}, { responseType: 'text' })
@@ -121,6 +124,7 @@ export class AppComponent implements OnInit {
       );
   }
 
+  // FEM: Download the CSV file
   private downloadFile(url: string): void {
     const link = document.createElement('a');
     link.href = url;
@@ -130,6 +134,9 @@ export class AppComponent implements OnInit {
     document.body.removeChild(link);
   }
 
-
+// TRD: Refresh the page to start over
+  refreshPage() {
+    window.location.reload();
+  }
 }
 
