@@ -50,13 +50,16 @@ export class AppComponent implements OnInit {
 
 
 
-    /**this.http
+    /** Replaced by the code below
+     *
+     this.http
       .post('http://localhost:8080/stocks', formData)
       .subscribe({
         next: (response) => console.log(response),
         error: (error) => console.log(error),
       });
      **/
+
     this.http
       .post('http://localhost:8080/stocks', formData)
       .subscribe(
@@ -91,12 +94,14 @@ export class AppComponent implements OnInit {
     console.log(this.finalValue);
     console.log(this.gainLossValue);
 
-    // Perform additional operations or calculations based on the extracted values
+    /** Not needed calculations are made in the backend
+     *
     const profit = this.finalValue - this.investValue;
     const roi = (profit / this.investValue) * 100;
 
     console.log(profit);
     console.log(roi);
+     **/
 
   }
 

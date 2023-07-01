@@ -1,4 +1,5 @@
 
+<div *ngIf="!apiResponse">
 <div class="form">
   <h2>Investment Calculator</h2>
   <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
@@ -74,15 +75,9 @@
     <input type="submit" id="submit" name="stockValue">
   </form>
 </div>
-
-<div *ngIf="apiResponse">
-  <h2>Response From API</h2>
-  <pre>{{ apiResponse | json }}</pre>
 </div>
 
 <div *ngIf="apiResponse">
-  <h2>Response Data</h2>
-  <pre>{{ apiResponse | json }}</pre>
 
   <h3>Extracted Values:</h3>
   <p>Start Date: {{ startDate }}</p>
@@ -93,6 +88,22 @@
   <p>Invest Value: {{ investValue }}</p>
   <p>Final Value: {{ finalValue }}</p>
   <p>Gain/Loss Value: {{ gainLossValue }}</p>
+
+  <button onClick="window.location.reload();">Start Over</button>
+<br>
+  <br>
+  <button (click)="downloadFile()">Download File</button>
 </div>
 
-<button (click)="downloadFile()">Download File</button>
+<!-- Not needed everything will be shown on one page
+<app-results
+  [startDate]="startDate"
+  [endDate]="endDate"
+  [stockName]="stockName"
+  [startValue]="startValue"
+  [endValue]="endValue"
+  [investValue]="investValue"
+  [finalValue]="finalValue"
+  [gainLossValue]="gainLossValue"
+></app-results>
+-->
