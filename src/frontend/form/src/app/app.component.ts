@@ -105,14 +105,24 @@ export class AppComponent implements OnInit {
 
   }
 
-  downloadFile() {
-    const fileUrl = '1900-01-01_2999-01-01_Default_0.0.csv';
-
-    fetch(fileUrl)
-      .then(response => response.blob())
-      .then(blob => saveAs(blob, 'Your-Stock-Request.csv'))
-      .catch(error => console.error('Error downloading file:', error));
+  exportStockData(): void {
+    const apiUrl = 'http://localhost:8080/exporter/export';
+    this.http.post(apiUrl, {}, { responseType: 'text' })
+      .subscribe(
+        (response: string) => {
+          // Handle successful response here
+          console.log('CSV file URL:', response);
+          // You can open the CSV file in a new window/tab using the URL received in the response.
+          // For example:
+          // window.open(response);
+        },
+        (error: any) => {
+          // Handle error response here
+          console.error('Error exporting stock data:', error);
+        }
+      );
   }
+
 
 }
 
