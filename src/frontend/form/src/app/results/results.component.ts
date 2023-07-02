@@ -6,6 +6,8 @@ import { Chart, ChartData, ChartOptions } from 'chart.js';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
+
+// TRD: The ResultsComponent is a child component of the AppComponent. It receives the data from the parent component and displays it in the template.
 export class ResultsComponent implements AfterViewInit {
   @Input() startDate: string;
   @Input() endDate: string;
@@ -16,6 +18,7 @@ export class ResultsComponent implements AfterViewInit {
   @Input() finalValue: number;
   @Input() gainLossValue: number;
 
+  // TRD: The Chart on the web does not work.
   @ViewChild('chartCanvas') chartCanvas: ElementRef;
   private chart: Chart;
 
@@ -23,6 +26,7 @@ export class ResultsComponent implements AfterViewInit {
     this.createChart();
   }
 
+  // TRD: The createChart method creates a new Chart instance and renders it on the canvas element.
   private createChart() {
     const canvas: HTMLCanvasElement = this.chartCanvas.nativeElement;
     const ctx = canvas.getContext('2d');
