@@ -7,7 +7,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ResultsComponent } from './results/results.component';
 
-
+// TRD: The AppModule is the root module of the application. It imports the BrowserModule, AppRoutingModule, ReactiveFormsModule, and HttpClientModule.
 @NgModule({
   declarations: [
     AppComponent,
