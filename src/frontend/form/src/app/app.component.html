@@ -16,6 +16,7 @@
 
   <div class="center-content">
 
+    <!-- Beginning of Form -->
     <div *ngIf="!apiResponse">
       <div class="form">
         <h2>Investment Calculator</h2>
@@ -95,6 +96,7 @@
       </div>
     </div>
 
+    <!-- Show the Values from the API on the on the page (without the Form) -->
     <div *ngIf="apiResponse">
 
       <h2>Take a look at your investment:</h2>
@@ -131,6 +133,7 @@
     -->
   </div>
 
+  <!-- A Footer on the page with some information about this project -->
   <div class="footer">
     <div>
       <ul>
