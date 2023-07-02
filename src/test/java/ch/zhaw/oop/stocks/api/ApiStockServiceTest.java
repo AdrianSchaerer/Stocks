@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StockServiceTest {
+class ApiStockServiceTest {
 
     private final String earliestTimeStampSource = "{\n" +
             "  \"datetime\": \"1970-01-01\",\n" +
