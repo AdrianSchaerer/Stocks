@@ -34,4 +34,12 @@ public class ApiStockValuePOJO {
     public double getVolume() {
         return volume;
     }
+
+    // ADR: Added setters for testing purposes
+    public void setDatetime(LocalDate datetime) {
+        this.datetime = datetime;
+    }
+    public void setClose(double close) {
+        this.close = close;
+    }
 }

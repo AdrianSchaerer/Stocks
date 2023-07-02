@@ -1,8 +1,11 @@
-package ch.zhaw.oop.stocks.stocks;
+package ch.zhaw.oop.stocks.stocks.pojo;
 
 import ch.zhaw.oop.stocks.api.ApiStockService;
 import ch.zhaw.oop.stocks.api.ApiStockValue;
 import ch.zhaw.oop.stocks.api.ApiStockValueList;
+import ch.zhaw.oop.stocks.api.pojo.ApiStockValueListPOJO;
+import ch.zhaw.oop.stocks.api.pojo.ApiStockValuePOJO;
+import ch.zhaw.oop.stocks.stocks.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +20,13 @@ import java.time.LocalDate;
  * @since       2023-06-23
  */
 @Service
-public class StockService {
+public class StockServicePOJO {
 
     // ADR: Refactored from the ApiStockController
     private final ApiStockService apiStockService;
 
     @Autowired
-    public StockService(ApiStockService apiStockService) {
+    public StockServicePOJO(ApiStockService apiStockService) {
         this.apiStockService = apiStockService;
     }
 
@@ -36,7 +39,7 @@ public class StockService {
             ApiStockValueList apiStockValueList = apiStockService.timeSeries(stock.getStockName(), stock.getStartDate(), stock.getEndDate());
 
             // ADR: Start Date -> Test if there are Stocks available from the Web (User input), otherwise add 1 day until successful
-            stock = stockDateCheck(apiStockValueList, stock);
+//            stock = stockDateCheck(apiStockValueList, stock);
 
             // ADR: Search the values (close) for start and end Date and put it in startValue and endValue
             for (ApiStockValue stockValue : apiStockValueList.getValues()) {
@@ -59,7 +62,7 @@ public class StockService {
     }
 
     // ADR: private method to check if there is a Stock available on this day otherwise look for the next one
-    private static Stock stockDateCheck(ApiStockValueList apiStockValueList, Stock stock) {
+    public static StockPOJO stockDateCheck(ApiStockValueListPOJO apiStockValueList, StockPOJO stock) {
 
         // ADR: Use a separate variable to check for a date which holds values
         LocalDate startDateNew = stock.getStartDate();
@@ -68,7 +71,7 @@ public class StockService {
         // ADR: Check Start Date
         boolean dateAvailable = false;
         while (!dateAvailable) {
-            for (ApiStockValue stockValue : apiStockValueList.getValues()) {
+            for (ApiStockValuePOJO stockValue : apiStockValueList.getValues()) {
                 if (stockValue.getDatetime().equals(startDateNew)) {
                     dateAvailable = true;
                     break;
@@ -86,7 +89,7 @@ public class StockService {
         // ADR: Check End Date
         dateAvailable = false;
         while (!dateAvailable) {
-            for (ApiStockValue stockValue : apiStockValueList.getValues()) {
+            for (ApiStockValuePOJO stockValue : apiStockValueList.getValues()) {
                 if (stockValue.getDatetime().equals(endDateNew)) {
                     dateAvailable = true;
                     break;
