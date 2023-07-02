@@ -1,8 +1,8 @@
-package ch.zhaw.oop.stocks.pojo;
+package ch.zhaw.oop.stocks.api.pojo;
 
 import java.time.LocalDate;
 
-public class StockValuePOJO {
+public class ApiStockValuePOJO {
 
     private LocalDate datetime;
     private double open;

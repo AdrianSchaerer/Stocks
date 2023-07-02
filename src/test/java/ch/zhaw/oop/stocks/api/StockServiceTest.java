@@ -1,10 +1,9 @@
 package ch.zhaw.oop.stocks.api;
 
-import ch.zhaw.oop.stocks.pojo.*;
+import ch.zhaw.oop.stocks.api.pojo.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +34,7 @@ class StockServiceTest {
     // end_date:    2020-05-08  the last date & value from API is always the day before (2020-05-07 instead of 2020-05-08)
     private final LocalDate startDate = LocalDate.of(2020, 5, 6);
     private final LocalDate endDate = LocalDate.of(2020, 5, 8);
-    private final String time_seriesSource = "{\n" +
+    private final String timeSeriesSource = "{\n" +
             "  \"meta\": {\n" +
             "    \"symbol\": \"AAPL\",\n" +
             "    \"interval\": \"1day\",\n" +
@@ -70,9 +69,9 @@ class StockServiceTest {
     @Test
     void stocks() throws JsonProcessingException {
         JsonNode node = Json.parse(stocksSource);
-        StockDescriptionListPOJO pojo = Json.fromJson(node, StockDescriptionListPOJO.class);
+        ApiStockDescriptionListPOJO pojo = Json.fromJson(node, ApiStockDescriptionListPOJO.class);
         String symbol = "";
-        for (StockDescriptionPOJO bP : pojo.getData()) {
+        for (ApiStockDescriptionPOJO bP : pojo.getData()) {
             if(bP.getSymbol().equals("AACI")){
                 symbol = bP.getSymbol();
             }
@@ -81,17 +80,17 @@ class StockServiceTest {
     }
 
     @Test
-    void earliest_timestamp() throws JsonProcessingException {
+    void earliestTimestamp() throws JsonProcessingException {
         JsonNode node = Json.parse(earliestTimeStampSource);
-        EarliestTimestampPOJO pojo = Json.fromJson(node, EarliestTimestampPOJO.class);
+        ApiStockEarliestTimestampPOJO pojo = Json.fromJson(node, ApiStockEarliestTimestampPOJO.class);
         assertEquals("1970-01-01", pojo.getDatetime().toString());
     }
 
     @Test
-    void time_series() throws JsonProcessingException {
-        JsonNode node = Json.parse(time_seriesSource);
-        StockValueListPOJO pojo = Json.fromJson(node, StockValueListPOJO.class);
-        for (StockValuePOJO stockValue : pojo.getValues()) {
+    void timeSeries() throws JsonProcessingException {
+        JsonNode node = Json.parse(timeSeriesSource);
+        ApiStockValueListPOJO pojo = Json.fromJson(node, ApiStockValueListPOJO.class);
+        for (ApiStockValuePOJO stockValue : pojo.getValues()) {
             if (stockValue.getDatetime().equals(startDate)) {
                 assertEquals("2020-05-06",stockValue.getDatetime().toString());
                 assertEquals(75.16000,stockValue.getClose());

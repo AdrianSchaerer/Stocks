@@ -1,6 +1,6 @@
-package ch.zhaw.oop.stocks.pojo;
+package ch.zhaw.oop.stocks.api.pojo;
 
-public class StockDescriptionPOJO {
+public class ApiStockDescriptionPOJO {
 
     private String symbol;      //:"AACG"
     private String name;        //:"ATA Creativity Global"
