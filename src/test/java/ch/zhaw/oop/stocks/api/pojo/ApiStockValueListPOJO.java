@@ -9,4 +9,9 @@ public class ApiStockValueListPOJO {
     public List<ApiStockValuePOJO> getValues() {
         return values;
     }
+
+    //ADR: Added setter for testing purposes
+    public void setValues(List<ApiStockValuePOJO> values) {
+        this.values = values;
+    }
 }
