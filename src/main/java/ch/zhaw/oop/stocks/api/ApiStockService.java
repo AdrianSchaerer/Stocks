@@ -103,7 +103,12 @@ public class ApiStockService {
         }
     }
 
-    // ToDo: will this be used? otherwise we can delete it.
+    /**
+     * <p>makeHttpRequest()</p>
+     * <p>To reduce the amount of code if enclosed with try-catch. </p>
+     * @param request the object from class HttpRequest
+     * @return JsonNode
+     */
     private JsonNode makeHttpRequest(HttpRequest request) {
         HttpResponse<String> response = null;
         try {
