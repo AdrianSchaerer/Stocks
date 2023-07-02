@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
   <div class="header">
     <header class="header">
       <h1 class="header-title">Stock Search Engine</h1>
@@ -19,6 +19,7 @@
     <div *ngIf="!apiResponse">
       <div class="form">
         <h2>Investment Calculator</h2>
+        <p>Enter the amount you want to invest, the start and end date and the stock you want to invest in.</p>
         <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
           <label for="investValue">Investment Amount</label>
           <input type="text" id="investValue" name="investValue" placeholder="Enter Amount" formControlName="investValue">
@@ -96,7 +97,11 @@
 
     <div *ngIf="apiResponse">
 
-      <h3>Extracted Values:</h3>
+      <h2>Take a look at your investment:</h2>
+      <p>If you would have invested {{investValue}}$ in {{stockName}} at the chosen dates you would have a loss or gain of <strong>{{gainLossValue}}$</strong>. </p>
+      <p>Take a look at the all the values below to analyze your investment.</p>
+
+      <h3>Investment Details:</h3>
       <p>Start Date: {{ startDate }}</p>
       <p>End Date: {{ endDate }}</p>
       <p>Stock Name: {{ stockName }}</p>
@@ -129,12 +134,13 @@
   <div class="footer">
     <div>
       <ul>
-        <li><a href="#">Home</a></li>
+        <li><a href="http://localhost:4200">Home</a></li>
       </ul>
     </div>
     <div>
       <p>&copy; 2023 Stock Search project</p>
-      <p class="authors">Authors: Adrian Hauser, Dominic Troll and Manuel Ferretti</p>
+      <p class="authors">Authors: Adrian Schärer, Dominic Troll and Manuel Ferretti</p>
+      <p class="authors">Application created as project in ZHAW CAS Object Oriented Programming.</p>
     </div>
   </div>
 
