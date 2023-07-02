@@ -102,16 +102,16 @@
       <h2>Take a look at your investment:</h2>
       <p>If you would have invested {{investValue}}$ in {{stockName}} at the chosen dates you would have a loss or gain of <strong>{{gainLossValue}}$</strong>. </p>
       <p>Take a look at the all the values below to analyze your investment.</p>
-
+<br>
       <h3>Investment Details:</h3>
       <p>Start Date: {{ startDate }}</p>
       <p>End Date: {{ endDate }}</p>
       <p>Stock Name: {{ stockName }}</p>
-      <p>Start Value: {{ startValue }}</p>
-      <p>End Value: {{ endValue }}</p>
-      <p>Invest Value: {{ investValue }}</p>
-      <p>Final Value: {{ finalValue }}</p>
-      <p>Gain/Loss Value: {{ gainLossValue }}</p>
+      <p>Start Value: {{ startValue }}$</p>
+      <p>End Value: {{ endValue }}$</p>
+      <p>Invest Value: {{ investValue }}$</p>
+      <p>Final Value: {{ finalValue }}$</p>
+      <p>Gain/Loss Value: {{ gainLossValue }}$</p>
 
       <button onClick="window.location.reload();" class="button">Start Over</button>
       <br>
