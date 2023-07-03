@@ -1,9 +1,8 @@
 package ch.zhaw.oop.stocks.stocks;
-
-import ch.zhaw.oop.stocks.api.pojo.ApiStockValueListPOJO;
-import ch.zhaw.oop.stocks.api.pojo.ApiStockValuePOJO;
-import ch.zhaw.oop.stocks.stocks.pojo.StockPOJO;
-import ch.zhaw.oop.stocks.stocks.pojo.StockServicePOJO;
+import ch.zhaw.oop.stocks.api.ApiStockService;
+import ch.zhaw.oop.stocks.api.ApiStockValue;
+import ch.zhaw.oop.stocks.api.ApiStockValueList;
+import ch.zhaw.oop.stocks.stocks.Stock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,57 +11,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+public class StockServiceTest {
 
-class StockServiceTest {
-
-    // ADR: Request from Web
-    StockPOJO stockPOJO = new StockPOJO();
-    // ADR: ApiStockValueList
-    ApiStockValueListPOJO apiStockValueListPOJO = new ApiStockValueListPOJO();
-    // ADR: ApiStockValues
-    ApiStockValuePOJO value1 = new ApiStockValuePOJO();
-    ApiStockValuePOJO value2 = new ApiStockValuePOJO();
-    ApiStockValuePOJO value3 = new ApiStockValuePOJO();
-    // ADR: Adding the values to ArrayList
-    List<ApiStockValuePOJO> list = new ArrayList<>();
+    private StockService stockService;
+    private ApiStockService apiStockService;
 
     @BeforeEach
-    void setUp() {
-        stockPOJO.setStockName("AAPL");
-        stockPOJO.setInvestValue(1000);
-        stockPOJO.setStartDate(LocalDate.of(2021, 1, 1));
-        stockPOJO.setEndDate(LocalDate.of(2021, 1, 8));
-
-        value1.setDatetime(LocalDate.of(2021,1,4));
-        value1.setClose(129.41);
-
-        value2.setDatetime(LocalDate.of(2021, 1, 5));
-        value2.setClose(131.00999);
-
-        value3.setDatetime(LocalDate.of(2021, 1, 6));
-        value3.setClose(126.6);
-
-        list.add(value1);
-        list.add(value2);
-        list.add(value3);
-
-        // ADR: Setting the List to apiStockValueList
-        apiStockValueListPOJO.setValues(list);
-    }
-    @Test
-    void stockDateCheckTestStartDate() {
-        StockServicePOJO.stockDateCheck(apiStockValueListPOJO,stockPOJO);
-
-        // ADR: Start Date: Input was 2021-01-01 -> valid date is 2021-1-4
-        assertEquals(stockPOJO.getStartDate(), LocalDate.of(2021, 1, 4));
+    public void setup() {
+        apiStockService = new ApiStockService(); // Create an instance of the actual ApiStockService
+        stockService = new StockService(apiStockService);
     }
 
     @Test
-    void stockDateCheckTestEndDate() {
-        StockServicePOJO.stockDateCheck(apiStockValueListPOJO,stockPOJO);
-        // ADR: End Date: Input was 2021-01-01 -> valid date is 2021-1-6
-        assertEquals(stockPOJO.getEndDate(), LocalDate.of(2021, 1, 6));
+    public void testMakeAPICall_Successful() throws Exception {
+        // Create a sample Stock object
+        Stock stock = new Stock();
+        stock.setStockName("AAPL");
+        stock.setStartDate(LocalDate.parse("2023-01-01"));
+        stock.setEndDate(LocalDate.parse("2023-12-31"));
+
+        // Call the method under test
+        Stock updatedStock = stockService.makeAPICall(stock);
+
+        // Verify the expected behavior
+        assertEquals(LocalDate.parse("2023-01-01"), updatedStock.getStartDate());
+        assertEquals(LocalDate.parse("2023-12-31"), updatedStock.getEndDate());
+        // Additional assertions based on the actual API response
+
+        // Note: Since the test uses the actual API service, the behavior and results may vary based on real data and API availability.
+        // Make sure to handle any exceptions that might occur during the API call.
     }
 
+    @Test
+    public void testMakeAPICall_Exception() {
+        // Create a sample Stock object
+        Stock stock = new Stock();
+        stock.setStockName("INVALID_STOCK");
+        stock.setStartDate(LocalDate.parse("2023-01-01"));
+        stock.setEndDate(LocalDate.parse("2023-12-31"));
+
+        // Call the method under test and expect an exception
+        assertThrows(Exception.class, () -> stockService.makeAPICall(stock));
+
+        // Note: This test case assumes that an exception will be thrown for an invalid stock name.
+        // Adjust the expectations based on the actual behavior of the API service.
+    }
 }

@@ -42,18 +42,18 @@ export class ResultsComponent implements AfterViewInit {
       }]
     };
 
-    const options: ChartOptions = {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    };
+//    const options: ChartOptions = {
+//      scales: {
+//        y: {
+//          beginAtZero: true
+//        }
+//      }
+//    };
 
-    this.chart = new Chart(ctx, {
-      type: 'line',
-      data,
-      options
-    });
+//    this.chart = new Chart(ctx, {
+//      type: 'line',
+//      data,
+//      options
+//    });
   }
 }
