@@ -1,6 +1,5 @@
 package ch.zhaw.oop.stocks.api;
 
-import ch.zhaw.oop.stocks.api.pojo.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
@@ -65,32 +64,31 @@ class ApiStockServiceTest {
             "  \"status\": \"ok\"\n" +
             "}";
 
-
     @Test
-    void stocks() throws JsonProcessingException {
+    void stocksTest() throws JsonProcessingException {
         JsonNode node = Json.parse(stocksSource);
-        ApiStockDescriptionListPOJO pojo = Json.fromJson(node, ApiStockDescriptionListPOJO.class);
+        ApiStockDescriptionList apiStockDescriptionList = Json.fromJson(node, ApiStockDescriptionList.class);
         String symbol = "";
-        for (ApiStockDescriptionPOJO bP : pojo.getData()) {
-            if(bP.getSymbol().equals("AACI")){
-                symbol = bP.getSymbol();
+        for (ApiStockDescription apiStockDescription : apiStockDescriptionList.getData()) {
+            if(apiStockDescription.getSymbol().equals("AACI")){
+                symbol = apiStockDescription.getSymbol();
             }
         }
         assertEquals("AACI",symbol);
     }
 
     @Test
-    void earliestTimestamp() throws JsonProcessingException {
+    void earliestTimestampTest() throws JsonProcessingException {
         JsonNode node = Json.parse(earliestTimeStampSource);
-        ApiStockEarliestTimestampPOJO pojo = Json.fromJson(node, ApiStockEarliestTimestampPOJO.class);
-        assertEquals("1970-01-01", pojo.getDatetime().toString());
+        ApiStockEarliestTimestamp apiStockEarliestTimestamp = Json.fromJson(node, ApiStockEarliestTimestamp.class);
+        assertEquals("1970-01-01", apiStockEarliestTimestamp.getDatetime().toString());
     }
 
     @Test
-    void timeSeries() throws JsonProcessingException {
+    void timeSeriesTest() throws JsonProcessingException {
         JsonNode node = Json.parse(timeSeriesSource);
-        ApiStockValueListPOJO pojo = Json.fromJson(node, ApiStockValueListPOJO.class);
-        for (ApiStockValuePOJO stockValue : pojo.getValues()) {
+        ApiStockValueList apiStockValueList = Json.fromJson(node, ApiStockValueList.class);
+        for (ApiStockValue stockValue : apiStockValueList.getValues()) {
             if (stockValue.getDatetime().equals(startDate)) {
                 assertEquals("2020-05-06",stockValue.getDatetime().toString());
                 assertEquals(75.16000,stockValue.getClose());

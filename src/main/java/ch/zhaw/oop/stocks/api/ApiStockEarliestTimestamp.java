@@ -1,6 +1,9 @@
 package ch.zhaw.oop.stocks.api;
 
+import java.sql.Time;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * <h1>StockEarliestTimestamp</h1>
@@ -11,14 +14,9 @@ import java.time.LocalDate;
 public class ApiStockEarliestTimestamp {
 
     private LocalDate datetime;
-    private int unix_time;
 
     public LocalDate getDatetime() {
         return datetime;
-    }
-
-    public int getUnix_time() {
-        return unix_time;
     }
 
 }

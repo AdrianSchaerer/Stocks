@@ -1,6 +1,6 @@
 package ch.zhaw.oop.stocks.api;
 
-import ch.zhaw.oop.stocks.api.pojo.JsonPOJO;
+import ch.zhaw.oop.stocks.api.pojo.SimpleTestCaseJsonPOJO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,14 +24,14 @@ class JsonTest {
 
     // ADR: Testing the conversion from Json String to JsonNode class
     @Test
-    void parse() throws JsonProcessingException {
+    void parse() {
         assertEquals(node.get("title").asText(), "This is a title");
     }
 
     // ADR: Testing the mapping from JsonNode class to a Java class
     @Test
     void fromJson() throws JsonProcessingException {
-        JsonPOJO pojo = Json.fromJson(node, JsonPOJO.class);
-        assertEquals(pojo.getTitle(), "This is a title");
+        SimpleTestCaseJsonPOJO json = Json.fromJson(node, SimpleTestCaseJsonPOJO.class);
+        assertEquals(json.getTitle(), "This is a title");
     }
 }

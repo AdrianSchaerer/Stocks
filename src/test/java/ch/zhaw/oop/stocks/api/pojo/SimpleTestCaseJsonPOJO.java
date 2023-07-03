@@ -1,6 +1,6 @@
 package ch.zhaw.oop.stocks.api.pojo;
 
-public class JsonPOJO {
+public class SimpleTestCaseJsonPOJO {
 
     private String title;
 
