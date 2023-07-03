@@ -2,10 +2,10 @@ package ch.zhaw.oop.stocks.api;
 
 /**
  * <h1>StockDescription</h1>
- * <p>This class represents the model for stocks.</p>
- * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version     1.0
- * @since       2023-06-23
+ * <p> * This class represents the model for stocks.</p>
+ *
+ *  @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ *  @version 0.1
  */
 public class ApiStockDescription {
 

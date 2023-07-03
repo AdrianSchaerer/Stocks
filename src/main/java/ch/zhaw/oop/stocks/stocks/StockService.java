@@ -10,11 +10,11 @@ import java.time.LocalDate;
 
 /**
  * <h1>StockService</h1>
- * The class StockService contains some static methods to fetch data from the Stock API
- * In this case the provider twelvedata is used.
- * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version     1.0
- * @since       2023-06-23
+ * <p>FEM: The class StockService contains some static methods to fetch data from the Stock API</p>
+ * <p>In this case the provider twelvedata is used.</p>
+ *
+ * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version 0.1
  */
 @Service
 public class StockService {
@@ -22,11 +22,22 @@ public class StockService {
     // ADR: Refactored from the ApiStockController
     private final ApiStockService apiStockService;
 
+    /**
+     * FEM: Constructs a StockService instance.
+     *
+     * @param apiStockService the API stock service dependency
+     */
     @Autowired
     public StockService(ApiStockService apiStockService) {
         this.apiStockService = apiStockService;
     }
-
+    /**
+     * FEM: Makes an API call to fetch stock data and updates the provided Stock object with start and end values.
+     *
+     * @param stock the Stock object to update
+     * @return the updated Stock object
+     * @throws Exception if there is an error making the API call
+     */
     public Stock makeAPICall(Stock stock) throws Exception {
         double startValue = 0.0;
         double endValue = 0.0;
@@ -58,7 +69,13 @@ public class StockService {
         return stock;
     }
 
-    // ADR: private method to check if there is a Stock available on this day otherwise look for the next one
+    /**
+     * ADR/FEM: Checks if there is a stock available on a given date and adjusts the start and end dates accordingly.
+     *
+     * @param apiStockValueList the list of stock values from the API
+     * @param stock the Stock object to adjust the dates for
+     * @return the adjusted Stock object
+     */
     private static Stock stockDateCheck(ApiStockValueList apiStockValueList, Stock stock) {
 
         // ADR: Use a separate variable to check for a date which holds values

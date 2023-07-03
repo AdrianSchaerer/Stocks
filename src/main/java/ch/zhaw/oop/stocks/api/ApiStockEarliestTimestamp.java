@@ -4,10 +4,9 @@ import java.time.LocalDate;
 
 /**
  * <h1>StockEarliestTimestamp</h1>
- * StockEarliestTimestamp is used in StockService for the method earliest_timestamp.
- * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version     1.0
- * @since       2023-06-23
+ * <p>StockEarliestTimestamp is used in StockService for the method earliest_timestamp.</p>
+ * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version 0.1
  */
 public class ApiStockEarliestTimestamp {
 

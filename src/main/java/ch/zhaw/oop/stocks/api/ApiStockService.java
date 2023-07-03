@@ -14,11 +14,10 @@ import java.time.LocalDate;
 
 /**
  * <h1>ApiStockService</h1>
- * The class ApiStockService contains some methods to fetch data from the web API
- * In this case the provider twelvedata is used.
- * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version     1.0
- * @since       2023-06-23
+ * <p>The class ApiStockService contains some methods to fetch data from the web API</p>
+ * <p>In this case the provider twelvedata is used.</p>
+ * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version 0.1
  */
 @Service
 public class ApiStockService {

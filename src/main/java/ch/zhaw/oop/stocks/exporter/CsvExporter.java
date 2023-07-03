@@ -12,10 +12,11 @@ import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * FEM: This class is used to perform basic CSV exporter tasks.
- * Exports data from Stock object as CSV file to /resources/csvexport/
- * Also generates an unique file name based on search query.
- * Files are overwritten if the same values are used.
+ * <h1>CsvExporter</h1>
+ * <p>FEM: This class is used to perform basic CSV exporter tasks.</p>
+ * <p>Exports data from Stock object as CSV file to /src/frontend/form/src/assets/csvexport/</p>
+ * <p>Also generates an unique file name based on search query.</p>
+ * <p>Files are overwritten if the same values are used.</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
@@ -24,10 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CsvExporter {
 
     private final Stock stock;
+    // FEM: Final for file export folder. May be changed if necessary.
     private static final String CSV_EXPORT_DIRECTORY = "src/frontend/form/src/assets/csvexport/";
 
-    @Value("src/frontend/form/src/assets/csvexport/")
-    private String csvExportDirectory;
     /** FEM: Constructor for the CsvExporter
      *  Autoinjects stock when CsvExporter instance is created.
      *  Provides proper initialization with required stock dependency.
@@ -47,10 +47,10 @@ public class CsvExporter {
         FileWriter writer = new FileWriter(file);
         CSVWriter csvWriter = new CSVWriter(writer);
 
-        // Write the header
+        // FEM: Write the header. Currently with fixed column values. May be changed in future (if necessary)
         csvWriter.writeNext(new String[] { "startDate", "endDate", "stockName", "startValue", "endValue", "investValue", "finalValue", "gainLossValue" });
 
-        // Write the data row
+        // FEM: Write the data row. Currently only one data row is written. May be changed in future.
         csvWriter.writeNext(new String[] {
                 stock.getStartDate().toString(),
                 stock.getEndDate().toString(),
@@ -65,6 +65,7 @@ public class CsvExporter {
         csvWriter.close();
         writer.close();
 
+        // FEM: Generate download-URL for frontend. Currently under angular frontend /assets/csvexport/.
         String fileUrl = "http://localhost:4200/assets/csvexport/" + filename;
         return fileUrl;
     }

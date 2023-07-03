@@ -6,10 +6,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
  *  <h1>Json</h1>
- *  The Json class is used to parse Json to Java code using an ObjectMapper.
- * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version     1.0
- * @since       2023-06-23
+ *  <p>The Json class is used to parse Json to Java code using an ObjectMapper.</p>
+ * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version 0.1
  */
 public class Json {
     private static final ObjectMapper objectMapper = getDefaultObjectMapper();

@@ -5,9 +5,8 @@ import java.time.LocalDate;
 /**
  * <h1>StockValue</h1>
  * <p>This class represents the model for data of the stock of a specific day</p>
- * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version     1.0
- * @since       2023-06-23
+ * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version 0.1
  */
 public class ApiStockValue {
 

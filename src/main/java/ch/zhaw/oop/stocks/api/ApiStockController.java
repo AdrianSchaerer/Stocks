@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-/** FEM: Invokes an API call and returns its result.
+/**
+ *  <h1>StockDescription</h1>
+ *  <p>FEM: Invokes an API call and returns its result.</p>
+ *
+ *  @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ *  @version 0.1
  */
 
 // ADR: This class is not used at the moment

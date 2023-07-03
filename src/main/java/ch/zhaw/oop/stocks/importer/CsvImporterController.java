@@ -18,7 +18,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * FEM: CSV Importer controller class which is used to create new Importers
+ * <h1>CsvImporterController</h1>
+ * @todo: This class is only a placeholder to be implemented.
+ * <p>FEM: CSV Importer controller class which is used to create new Importers</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1

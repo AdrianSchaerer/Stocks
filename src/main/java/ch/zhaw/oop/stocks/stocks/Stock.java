@@ -3,32 +3,32 @@ package ch.zhaw.oop.stocks.stocks;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+
 /**
- * FEM: Stock object class which is used to hold the stock data.
+ * <h1>Stock</h1>
+ * <p>FEM: Stock object class which is used to hold the stock data.</p>
+ * <p>This class represents a stock with its properties and methods for setting and retrieving data.</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
  */
 @Component
 public class Stock {
-    /**
-     * Constructor for stock class objects.
-     * @param startDate, LocalDate, Start Date of the stock period
-     * @param endDate, LocalDate,  End Date of the stock period
-     * @param stockName, String, Unique Name Identifier of the stock, used for API Calls
-     * @param startValue, Double, Received Stock value at start date (close)
-     * @param endValue, Double, Received Stock value at end date (close)
-     * @param investValue, double, Received investment Value
-     * @param finalValue, double, received calculated final value of stock portfolio.
-     * @param gainLossValue, double, received calculated difference (gain or loss) of stock portfolio.
-     */
-    private LocalDate startDate, endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String stockName;
-    private double startValue, endValue, investValue, finalValue, gainLossValue;
+    private double startValue;
+    private double endValue;
+    private double investValue;
+    private double finalValue;
+    private double gainLossValue;
 
+    /**
+     * FEM: Constructor for creating a Stock object with default values.
+     */
     public Stock() {
-        this.startDate = LocalDate.of(1900, 01, 01);
-        this.endDate = LocalDate.of(2999, 01, 01);;
+        this.startDate = LocalDate.of(1900, 1, 1);
+        this.endDate = LocalDate.of(2999, 1, 1);
         this.stockName = "Default";
         this.startValue = 0.0;
         this.endValue = 0.0;
@@ -38,7 +38,12 @@ public class Stock {
     }
 
     /**
-     * FEM: Create a stock object. Fills the object with placeholder (default) data.
+     * FEM: Sets the stock data from a web input.
+     *
+     * @param startDate   The start date of the stock period.
+     * @param endDate     The end date of the stock period.
+     * @param stockName   The unique name identifier of the stock used for API calls.
+     * @param investValue The received investment value.
      */
     public void setStockFromWeb(LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
         this.startDate = startDate;
@@ -46,26 +51,42 @@ public class Stock {
         this.stockName = stockName;
         this.investValue = investValue;
 
-        //FEM: Print-Out for better analysis:
+        // FEM: Print for better analysis
         System.out.println("Start-Datum von Web-Eingabe: " + startDate);
         System.out.println("End-Datum von Web-Eingabe: " + endDate);
         System.out.println("Stock Name von Web-Eingabe: " + stockName);
         System.out.println("Investierter Betrag von Web-Eingabe: " + investValue);
     }
+
+    /**
+     * FEM: Sets the stock data from a CSV file.
+     *
+     * @param startDate   The start date of the stock period.
+     * @param endDate     The end date of the stock period.
+     * @param stockName   The unique name identifier of the stock.
+     * @param investValue The received investment value.
+     */
     public void setStockFromCSV(LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.stockName = stockName;
         this.investValue = investValue;
     }
+
+    /**
+     * FEM: Sets the stock data from an API response.
+     *
+     * @param startValue The received stock value at the start date.
+     * @param endValue   The received stock value at the end date.
+     */
     public void setStockFromAPI(double startValue, double endValue) {
         this.startValue = startValue;
         this.endValue = endValue;
 
-        // Calculate finalValue
+        // FEM: Calculate finalValue and rounds the result. Very basic - may include a more sophisticated calculation method:
         try {
             if (startValue != 0) {
-                this.finalValue = Math.round(investValue / startValue * endValue * 100.0)/100.0;
+                this.finalValue = Math.round(investValue / startValue * endValue * 100.0) / 100.0;
             } else {
                 throw new ArithmeticException("Division by zero error for finalValue calculation");
             }
@@ -75,24 +96,28 @@ public class Stock {
             System.err.println("Error calculating finalValue: " + e.getMessage());
         }
 
-        // Calculate gainLossValue
+        // FEM: Calculate gainLossValue and rounds the result. Very basic - may include a more sophisticated calculation method:
         try {
             this.gainLossValue = Math.round((finalValue - investValue) * 100.0) / 100.0;
         } catch (Exception e) {
-            // Handle any other exception that may occur during the calculation of gainLossValue
+            // FEM: Handle any other exception that may occur during the calculation of gainLossValue
             this.gainLossValue = 0;
             System.err.println("Error calculating gainLossValue: " + e.getMessage());
         }
-        //FEM: Print-Out for better analysis:
+
+        // FEM: Print for better analysis
         System.out.println("Start-Wert von API: " + startValue);
         System.out.println("End-Wert von API: " + endValue);
         System.out.println("Berechneter finaler Wert: " + finalValue);
         System.out.println("Berechneter Verlust oder Gewinn: " + gainLossValue);
     }
+
+    /**
+     * FEM: Creates a stock object with placeholder data.
+     */
     public void createStockObject() {
-        // Placeholder method to create a stock object
-        startDate = LocalDate.of(0000, 0, 0);
-        endDate = LocalDate.of(0000, 0, 0);
+        startDate = LocalDate.of(0, 0, 0);
+        endDate = LocalDate.of(0, 0, 0);
         stockName = "PLACEHOLDER";
         startValue = 0.0;
         endValue = 0.0;
@@ -100,72 +125,158 @@ public class Stock {
         finalValue = 0.0;
         gainLossValue = 0.0;
     }
+
     // FEM: Getters and Setters
-    /** FEM: Getter for the current startDate. */
+
+    /**
+     * FEM: Get the start date of the stock.
+     *
+     * @return The start date.
+     */
     public LocalDate getStartDate() {
         return startDate;
     }
-    /** FEM: Setter for the current startDate. */
+
+    /**
+     * FEM: Set the start date of the stock.
+     *
+     * @param startDate The start date to set.
+     */
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
-    /** FEM: Getter for the current endDate.  */
+
+    /**
+     * FEM: Get the end date of the stock.
+     *
+     * @return The end date.
+     */
     public LocalDate getEndDate() {
         return endDate;
     }
-    /** FEM: Setter for the current endDate. */
+
+    /**
+     * FEM: Set the end date of the stock.
+     *
+     * @param endDate The end date to set.
+     */
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-    /** FEM: Getter for the current stockName. */
+
+    /**
+     * FEM: Get the stock name.
+     *
+     * @return The stock name.
+     */
     public String getStockName() {
         return stockName;
     }
-    /** FEM: Setter for the current stockName. */
+
+    /**
+     * FEM: Set the stock name.
+     *
+     * @param stockName The stock name to set.
+     */
     public void setStockName(String stockName) {
         this.stockName = stockName;
     }
-    /** FEM: Getter for the current startValue. */
+
+    /**
+     * FEM: Get the stock's start value.
+     *
+     * @return The start value.
+     */
     public double getStartValue() {
         return startValue;
     }
-    /** FEM: Setter for the current startValue. */
+
+    /**
+     * FEM: Set the stock's start value.
+     *
+     * @param startValue The start value to set.
+     */
     public void setStartValue(double startValue) {
         this.startValue = startValue;
     }
-    /** FEM: Getter for the current endValue. */
+
+    /**
+     * FEM: Get the stock's end value.
+     *
+     * @return The end value.
+     */
     public double getEndValue() {
         return endValue;
     }
-    /** FEM: Setter for the current endValue. */
+
+    /**
+     * FEM: Set the stock's end value.
+     *
+     * @param endValue The end value to set.
+     */
     public void setEndValue(double endValue) {
         this.endValue = endValue;
     }
-    /** FEM: Getter for the current investValue. */
+
+    /**
+     * FEM: Get the investment value.
+     *
+     * @return The investment value.
+     */
     public double getInvestValue() {
         return investValue;
     }
-    /** FEM: Setter for the current investValue.   */
+
+    /**
+     * FEM: Set the investment value.
+     *
+     * @param investValue The investment value to set.
+     */
     public void setInvestValue(double investValue) {
         this.investValue = investValue;
     }
-    /** FEM: Getter for the current finalValue. */
+
+    /**
+     * FEM: Get the final value of the stock portfolio.
+     *
+     * @return The final value.
+     */
     public double getFinalValue() {
         return finalValue;
     }
-    /** FEM: Setter for the current finalValue.   */
-    public void setFinalValue(double finalValue) {this.finalValue = finalValue;
+
+    /**
+     * FEM: Set the final value of the stock portfolio.
+     *
+     * @param finalValue The final value to set.
+     */
+    public void setFinalValue(double finalValue) {
+        this.finalValue = finalValue;
     }
-    /** FEM: Getter for the current gainLossValue. */
+
+    /**
+     * FEM: Get the gain/loss value of the stock portfolio.
+     *
+     * @return The gain/loss value.
+     */
     public double getGainLossValue() {
         return gainLossValue;
     }
-    /** FEM: Setter for the current gainLossValue.   */
+
+    /**
+     * FEM: Set the gain/loss value of the stock portfolio.
+     *
+     * @param gainLossValue The gain/loss value to set.
+     */
     public void setGainLossValue(double gainLossValue) {
         this.gainLossValue = gainLossValue;
     }
-    /** FEM: Default toString Method. Converts all object data to String.
-     * @return Stock */
+
+    /**
+     * FEM: Returns a string representation of the Stock object.
+     *
+     * @return The string representation of the Stock object.
+     */
     @Override
     public String toString() {
         return "Stock{" +

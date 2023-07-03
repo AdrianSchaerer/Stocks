@@ -11,8 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.*;
 import java.time.LocalDate;
 /**
- * FEM: This class is used to perform basic CSV importer tasks.
- * Imports data from CSV file located in /resources/csvimport/
+ * <h1>CsvImporter</h1>
+ * @todo: This class is only a placeholder to be implemented.
+ * <p>FEM: This class is used to perform basic CSV importer tasks.</p>
+ * <p>Imports data from CSV file located in /resources/csvimport/</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
