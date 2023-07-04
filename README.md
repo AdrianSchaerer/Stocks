@@ -38,15 +38,19 @@ The following features are currently implemented:
 
 
 ## Setup
-Clone this repo to your System and run npm install to install all the dependencies.
+Clone this repo to your System and run npm install inside the angular directory to install all the dependencies for the frontend.
+To download and run npm install packages, you need an npm package manager. You can download it here: https://www.npmjs.com/get-npm or use node.js
 
 ## Usage
-After you clone this repo to your System, go to its root directory and run npm install to install its dependencies.
+>>>After you clone this repo to your System, go to its root directory and run npm install to install its dependencies.
+>   Why install it twice?
 
 Once the dependencies are installed, you can run npm start to start the Backend application. With the ng serve command, the Frontend service is started.
 You will then be able to access it at https://localhost:4200
 
-Make sure port 8080 is also open. It's used for the backend communication.
+>>> npm start to run the backend?
+
+Make sure port 8080 is also open. It's used for the backend communication. To make the application work, you need to run both the frontend and the backend.
 
 
 ## Project Status
@@ -116,7 +120,7 @@ typescript: ~5.0.2
 - Our sincere gratitude to Matthias Bachmann for his invaluable contribution as a lecturer.
 
 ## License
-Copyright (c) Adrian Hauser, Dominic Troll and Manuel Ferretti
+Copyright (c) Adrian Schärer, Dominic Troll and Manuel Ferretti
 
 MIT License
 
