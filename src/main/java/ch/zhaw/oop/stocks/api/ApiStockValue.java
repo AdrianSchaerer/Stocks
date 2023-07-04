@@ -94,4 +94,28 @@ public class ApiStockValue {
     public double getVolume() {
         return volume;
     }
+
+    public void setDatetime(LocalDate datetime) {
+        this.datetime = datetime;
+    }
+
+    public void setOpen(double open) {
+        this.open = open;
+    }
+
+    public void setHigh(double high) {
+        this.high = high;
+    }
+
+    public void setLow(double low) {
+        this.low = low;
+    }
+
+    public void setClose(double close) {
+        this.close = close;
+    }
+
+    public void setVolume(double volume) {
+        this.volume = volume;
+    }
 }

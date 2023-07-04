@@ -3,8 +3,6 @@ package ch.zhaw.oop.stocks.stocks.pojo;
 import ch.zhaw.oop.stocks.api.ApiStockService;
 import ch.zhaw.oop.stocks.api.ApiStockValue;
 import ch.zhaw.oop.stocks.api.ApiStockValueList;
-import ch.zhaw.oop.stocks.api.pojo.ApiStockValueListPOJO;
-import ch.zhaw.oop.stocks.api.pojo.ApiStockValuePOJO;
 import ch.zhaw.oop.stocks.stocks.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +10,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 /**
+ * <h1>StockService</h1>
  * The class StockService contains some static methods to fetch data from the Stock API
  * In this case the provider twelvedata is used.
- *
- * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version 1.0
- * @since 2023 -06-23
+ * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version     1.0
+ * @since       2023-06-23
  */
 @Service
 public class StockServicePOJO {
@@ -25,23 +23,11 @@ public class StockServicePOJO {
     // ADR: Refactored from the ApiStockController
     private final ApiStockService apiStockService;
 
-    /**
-     * Instantiates a new Stock service pojo.
-     *
-     * @param apiStockService the api stock service
-     */
     @Autowired
     public StockServicePOJO(ApiStockService apiStockService) {
         this.apiStockService = apiStockService;
     }
 
-    /**
-     * Make api call stock.
-     *
-     * @param stock the stock
-     * @return the stock
-     * @throws Exception the exception
-     */
     public Stock makeAPICall(Stock stock) throws Exception {
         double startValue = 0.0;
         double endValue = 0.0;
@@ -73,15 +59,9 @@ public class StockServicePOJO {
         return stock;
     }
 
-    /**
-     * Stock date check stock pojo.
-     *
-     * @param apiStockValueList the api stock value list
-     * @param stock             the stock
-     * @return the stock pojo
-     */
-// ADR: private method to check if there is a Stock available on this day otherwise look for the next one
-    public static StockPOJO stockDateCheck(ApiStockValueListPOJO apiStockValueList, StockPOJO stock) {
+    // ADR: private method to check if there is a Stock available on this day otherwise look for the next one
+    // ADR: Changed visibility to public to be able to test it
+    public static Stock stockDateCheck(ApiStockValueList apiStockValueList, Stock stock) {
 
         // ADR: Use a separate variable to check for a date which holds values
         LocalDate startDateNew = stock.getStartDate();
@@ -90,7 +70,7 @@ public class StockServicePOJO {
         // ADR: Check Start Date
         boolean dateAvailable = false;
         while (!dateAvailable) {
-            for (ApiStockValuePOJO stockValue : apiStockValueList.getValues()) {
+            for (ApiStockValue stockValue : apiStockValueList.getValues()) {
                 if (stockValue.getDatetime().equals(startDateNew)) {
                     dateAvailable = true;
                     break;
@@ -101,14 +81,14 @@ public class StockServicePOJO {
                 break;
             }
             if (!dateAvailable) {
-                startDateNew = startDateNew.plusDays(1);
+                    startDateNew = startDateNew.plusDays(1);
             }
         }
 
         // ADR: Check End Date
         dateAvailable = false;
         while (!dateAvailable) {
-            for (ApiStockValuePOJO stockValue : apiStockValueList.getValues()) {
+            for (ApiStockValue stockValue : apiStockValueList.getValues()) {
                 if (stockValue.getDatetime().equals(endDateNew)) {
                     dateAvailable = true;
                     break;
