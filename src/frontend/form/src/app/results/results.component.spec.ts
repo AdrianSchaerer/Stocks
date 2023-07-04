@@ -1,3 +1,7 @@
+/** This file contains the code for the results component of the application.
+ * It contains the code to display the results of the stock investment.
+ */
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ResultsComponent } from './results.component';

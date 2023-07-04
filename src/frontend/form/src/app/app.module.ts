@@ -1,3 +1,7 @@
+/** The AppModule is the root module of the application.
+ * It imports the BrowserModule, AppRoutingModule, ReactiveFormsModule, and HttpClientModule.
+ * */
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 

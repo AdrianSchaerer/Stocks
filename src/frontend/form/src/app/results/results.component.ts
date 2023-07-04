@@ -1,3 +1,7 @@
+/** This file in TypeScript contains the code for the results component of the application.
+ * It contains the code to display the results of the stock investment.
+ */
+
 import { Component, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 // import { Chart, ChartData, ChartOptions } from 'chart.js';
 

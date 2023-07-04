@@ -22,7 +22,7 @@ body {
 /* Create a grid container */
 .container {
   display: grid;
-  grid-template-rows: minmax(150px, 18%) minmax(1000px, 75%) minmax(50px, 7%); /* Header, Content, Footer */
+  grid-template-rows: minmax(150px, 18%) minmax(930px, 72%) minmax(80px, 10%); /* Header, Content, Footer */
   grid-template-columns: 20% 1fr 20%; /* Left, Center, Right */
   gap: 0;
   height: 100%; /* Set the container height to 100% */
@@ -78,7 +78,7 @@ body {
   box-sizing: border-box;
   text-align: right;
   width: 100%; /* Set the width to 100% */
-  position: fixed; /* Set the position to fixed */
+  position: static; /* Set the position to fixed */
   bottom: 0; /* Position at the bottom */
 }
 
