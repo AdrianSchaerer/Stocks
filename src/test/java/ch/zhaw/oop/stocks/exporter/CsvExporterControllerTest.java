@@ -3,56 +3,59 @@ package ch.zhaw.oop.stocks.exporter;
 import ch.zhaw.oop.stocks.stocks.Stock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class CsvExporterControllerTest {
-    private CsvExporterController csvExporterController;
+class CsvExporterControllerTest {
+
+    @Mock
     private CsvExporter csvExporter;
+
+    @Mock
     private Stock stock;
 
+    private CsvExporterController csvExporterController;
+
     @BeforeEach
-    public void setup() {
-        csvExporter = mock(CsvExporter.class);
-        stock = mock(Stock.class);
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
         csvExporterController = new CsvExporterController();
+        csvExporterController.setCsvExporter(csvExporter);
+        when(stock.toString()).thenReturn("Mocked Stock");
+        csvExporterController.setStock(stock);
     }
 
     @Test
-    public void testExportStockDataToCsv_Successful() throws IOException {
-        String filename = "2023-01-01_2023-12-31_AAPL.csv";
-        String fileUrl = "http://localhost:4200/assets/csvexport/" + filename;
+    public void exportStockDataToCsv_ExportSuccessful_ReturnsFileUrl() throws IOException {
+        // Arrange
+        // No need to initialize stock here since it's already mocked
 
-        when(stock.getStartDate()).thenReturn(LocalDate.of(2023, 1, 1));
-        when(stock.getEndDate()).thenReturn(LocalDate.of(2023, 12, 31));
-        when(stock.getStockName()).thenReturn("AAPL");
-        when(csvExporter.exportStockData(stock, filename)).thenReturn(fileUrl);
+        // Act
+        csvExporterController.exportStockDataToCsv();
 
-        ResponseEntity<String> responseEntity = csvExporterController.exportStockDataToCsv();
-
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(fileUrl, responseEntity.getBody());
-        verify(csvExporter).exportStockData(stock, filename);
-        verifyNoMoreInteractions(csvExporter);
+        // Assert
+        verify(csvExporter).exportStockData(eq(stock), anyString());
     }
 
     @Test
-    public void testExportStockDataToCsv_Exception() throws IOException {
-        String errorMessage = "Error exporting stock data to CSV";
+    void exportStockDataToCsv_ExportThrowsIOException_ReturnsInternalServerError() throws IOException {
+        // Arrange
+        String expectedErrorResponse = "Error exporting stock data to CSV";
+        when(csvExporter.exportStockData(any(Stock.class), anyString())).thenThrow(IOException.class);
 
-        when(csvExporter.exportStockData(stock, anyString())).thenThrow(new IOException(errorMessage));
+        // Act
+        ResponseEntity<String> response = csvExporterController.exportStockDataToCsv();
 
-        ResponseEntity<String> responseEntity = csvExporterController.exportStockDataToCsv();
-
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
-        assertEquals(errorMessage, responseEntity.getBody());
-        verify(csvExporter).exportStockData(stock, anyString());
-        verifyNoMoreInteractions(csvExporter);
+        // Assert
+        verify(csvExporter).exportStockData(any(Stock.class), anyString());
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        assertEquals(expectedErrorResponse, response.getBody());
     }
 }

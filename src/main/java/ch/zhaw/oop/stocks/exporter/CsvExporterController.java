@@ -50,4 +50,16 @@ public class CsvExporterController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error exporting stock data to CSV");
         }
     }
+    public CsvExporter getCsvExporter() {
+        return csvExporter;
+    }
+    public void setCsvExporter(CsvExporter csvExporter) {
+        this.csvExporter = csvExporter;
+    }
+    public Stock getStock() {
+        return stock;
+    }
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
 }

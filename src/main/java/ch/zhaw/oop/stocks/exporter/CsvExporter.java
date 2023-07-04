@@ -40,33 +40,40 @@ public class CsvExporter {
      *  Gets the stock data and writes it to a CSV file.
      *  @return CSV File path (String)
      */
-        public String exportStockData(Stock stock, String filename) throws IOException {
+    public String exportStockData(Stock stock, String filename) throws IOException {
+        if (stock == null) {
+            throw new IOException("Stock object is null");
+        }
+
         String filePath = CSV_EXPORT_DIRECTORY + filename;
         File file = new File(filePath);
 
-        FileWriter writer = new FileWriter(file);
-        CSVWriter csvWriter = new CSVWriter(writer);
+        try (FileWriter writer = new FileWriter(file); CSVWriter csvWriter = new CSVWriter(writer)) {
+            // Write the header
+            csvWriter.writeNext(new String[]{"startDate", "endDate", "stockName", "startValue", "endValue", "investValue", "finalValue", "gainLossValue"});
 
-        // FEM: Write the header. Currently with fixed column values. May be changed in future (if necessary)
-        csvWriter.writeNext(new String[] { "startDate", "endDate", "stockName", "startValue", "endValue", "investValue", "finalValue", "gainLossValue" });
+            // Write the data row
+            csvWriter.writeNext(new String[]{
+                    stock.getStartDate().toString(),
+                    stock.getEndDate().toString(),
+                    stock.getStockName(),
+                    String.valueOf(stock.getStartValue()),
+                    String.valueOf(stock.getEndValue()),
+                    String.valueOf(stock.getInvestValue()),
+                    String.valueOf(stock.getFinalValue()),
+                    String.valueOf(stock.getGainLossValue())
+            });
 
-        // FEM: Write the data row. Currently only one data row is written. May be changed in future.
-        csvWriter.writeNext(new String[] {
-                stock.getStartDate().toString(),
-                stock.getEndDate().toString(),
-                stock.getStockName(),
-                String.valueOf(stock.getStartValue()),
-                String.valueOf(stock.getEndValue()),
-                String.valueOf(stock.getInvestValue()),
-                String.valueOf(stock.getFinalValue()),
-                String.valueOf(stock.getGainLossValue())
-        });
+            // Generate download URL for frontend
+            String fileUrl = "http://localhost:4200/assets/csvexport/" + filename;
+            return fileUrl;
+        } catch (IOException e) {
+            // Re-throw the exception with the correct type
+            throw new IOException("File not found", e);
+        }
+    }
 
-        csvWriter.close();
-        writer.close();
-
-        // FEM: Generate download-URL for frontend. Currently under angular frontend /assets/csvexport/.
-        String fileUrl = "http://localhost:4200/assets/csvexport/" + filename;
-        return fileUrl;
+    public Stock getStock() {
+        return stock;
     }
 }

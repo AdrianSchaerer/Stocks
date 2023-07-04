@@ -1,0 +1,2 @@
+"startDate","endDate","stockName","startValue","endValue","investValue","finalValue","gainLossValue"
+"2023-01-01","2023-01-31","Test Stock","100.0","150.0","200.0","180.0","-20.0"

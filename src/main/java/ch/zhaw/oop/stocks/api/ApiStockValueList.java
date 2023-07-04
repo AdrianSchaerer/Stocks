@@ -10,11 +10,18 @@ import java.util.List;
  * @version 0.1
  */
 public class ApiStockValueList {
-
+    public ApiStockValueList() { }
+    public ApiStockValueList(List<ApiStockValue> values) {
+        this.values = values;
+    }
 //    private String meta;
     private List<ApiStockValue> values;
 
     public List<ApiStockValue> getValues() {
         return values;
+    }
+
+    public void setValues(List<ApiStockValue> values) {
+        this.values = values;
     }
 }

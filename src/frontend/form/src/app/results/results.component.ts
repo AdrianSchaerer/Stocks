@@ -1,5 +1,5 @@
 import { Component, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Chart, ChartData, ChartOptions } from 'chart.js';
+// import { Chart, ChartData, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-results',
@@ -19,28 +19,28 @@ export class ResultsComponent implements AfterViewInit {
   @Input() gainLossValue: number;
 
   // TRD: The Chart on the web does not work.
-  @ViewChild('chartCanvas') chartCanvas: ElementRef;
-  private chart: Chart;
+//  @ViewChild('chartCanvas') chartCanvas: ElementRef;
+//  private chart: Chart;
 
   ngAfterViewInit() {
-    this.createChart();
+//    this.createChart();
   }
 
   // TRD: The createChart method creates a new Chart instance and renders it on the canvas element.
-  private createChart() {
-    const canvas: HTMLCanvasElement = this.chartCanvas.nativeElement;
-    const ctx = canvas.getContext('2d');
-
-    const data: ChartData = {
-      labels: ['Start', 'End'],
-      datasets: [{
-        label: 'Stock Value',
-        data: [this.startValue, this.endValue],
-        backgroundColor: 'rgba(0, 123, 255, 0.5)',
-        borderColor: 'rgba(0, 123, 255, 1)',
-        borderWidth: 1
-      }]
-    };
+//  private createChart() {
+//    const canvas: HTMLCanvasElement = this.chartCanvas.nativeElement;
+//    const ctx = canvas.getContext('2d');
+//
+//    const data: ChartData = {
+//      labels: ['Start', 'End'],
+//      datasets: [{
+//        label: 'Stock Value',
+//        data: [this.startValue, this.endValue],
+//        backgroundColor: 'rgba(0, 123, 255, 0.5)',
+//        borderColor: 'rgba(0, 123, 255, 1)',
+//        borderWidth: 1
+//      }]
+//    };
 
 //    const options: ChartOptions = {
 //      scales: {
@@ -55,5 +55,5 @@ export class ResultsComponent implements AfterViewInit {
 //      data,
 //      options
 //    });
-  }
+//  }
 }
