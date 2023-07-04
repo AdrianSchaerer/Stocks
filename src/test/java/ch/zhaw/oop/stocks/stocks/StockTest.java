@@ -6,16 +6,25 @@ import org.mockito.Mock;
 
 import java.time.LocalDate;
 
+/**
+ * The type Stock test.
+ */
 @SpringBootTest
 public class StockTest {
     @Mock
     private static Stock mockStock;
 
+    /**
+     * Sets .
+     */
     @BeforeEach
     public void setup() {
         mockStock = new Stock();
     }
 
+    /**
+     * Test default constructor.
+     */
     @Test
     public void testDefaultConstructor() {
         // Arrange
@@ -39,6 +48,9 @@ public class StockTest {
         Assertions.assertEquals(expectedGainLossValue, mockStock.getGainLossValue());
     }
 
+    /**
+     * Test setters and getters.
+     */
     @Test
     public void testSettersAndGetters() {
         // Arrange
@@ -72,6 +84,9 @@ public class StockTest {
         Assertions.assertEquals(gainLossValue, mockStock.getGainLossValue());
     }
 
+    /**
+     * Tear down.
+     */
     @AfterAll
     public static void tearDown() {
         System.out.println("After all tests have completed:");
@@ -79,6 +94,9 @@ public class StockTest {
         System.out.println("StockTest methods have run successfully.");
     }
 
+    /**
+     * Clean up each.
+     */
     @AfterEach
     public void cleanUpEach() {
         System.out.println("After each test method:");

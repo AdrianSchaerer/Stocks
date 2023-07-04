@@ -12,16 +12,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
+/**
+ * The type Stock controller test.
+ */
 public class StockControllerTest {
     private Stock stock;
     private StockService stockService;
     private StockController stockController;
 
+    /**
+     * Sets .
+     */
     @BeforeEach
     public void setup() {
         stockService = mock(StockService.class);
         stockController = new StockController(new Stock(), stockService);
     }
+
+    /**
+     * Test create stock successful.
+     */
     @Test
     public void testCreateStock_Successful() {
         // Arrange
@@ -62,6 +72,12 @@ public class StockControllerTest {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Test create stock exception.
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void testCreateStock_Exception() throws Exception {
         // Arrange
@@ -95,12 +111,18 @@ public class StockControllerTest {
     }
 
 
+    /**
+     * Tear down.
+     */
     @AfterAll
     public static void tearDown() {
         System.out.println("After all tests have completed:");
         System.out.println("StockTest methods have run successfully.");
     }
 
+    /**
+     * Clean up each.
+     */
     @AfterEach
     public void cleanUpEach() {
         System.out.println("After each test method:");

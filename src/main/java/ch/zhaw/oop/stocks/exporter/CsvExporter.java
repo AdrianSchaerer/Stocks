@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <h1>CsvExporter</h1>
  * <p>FEM: This class is used to perform basic CSV exporter tasks.</p>
  * <p>Exports data from Stock object as CSV file to /src/frontend/form/src/assets/csvexport/</p>
  * <p>Also generates an unique file name based on search query.</p>
@@ -28,17 +27,26 @@ public class CsvExporter {
     // FEM: Final for file export folder. May be changed if necessary.
     private static final String CSV_EXPORT_DIRECTORY = "src/frontend/form/src/assets/csvexport/";
 
-    /** FEM: Constructor for the CsvExporter
-     *  Autoinjects stock when CsvExporter instance is created.
-     *  Provides proper initialization with required stock dependency.
+    /**
+     * FEM: Constructor for the CsvExporter
+     * Autoinjects stock when CsvExporter instance is created.
+     * Provides proper initialization with required stock dependency.
+     *
+     * @param stock the stock Object
      */
     @Autowired
     public CsvExporter(Stock stock) {
         this.stock = stock;
     }
-    /** FEM: CSV Exporter method
-     *  Gets the stock data and writes it to a CSV file.
-     *  @return CSV File path (String)
+
+    /**
+     * FEM: CSV Exporter method
+     * Gets the stock data and writes it to a CSV file.
+     *
+     * @param stock    the stock
+     * @param filename the filename
+     * @return CSV File path (String)
+     * @throws IOException the io exception
      */
     public String exportStockData(Stock stock, String filename) throws IOException {
         if (stock == null) {
@@ -73,6 +81,11 @@ public class CsvExporter {
         }
     }
 
+    /**
+     * Gets stock.
+     *
+     * @return the stock
+     */
     public Stock getStock() {
         return stock;
     }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 /**
- * <h1>StockService</h1>
  * <p>FEM: The class StockService contains some static methods to fetch data from the Stock API</p>
  * <p>In this case the provider twelvedata is used.</p>
  *
@@ -31,6 +30,7 @@ public class StockService {
     public StockService(ApiStockService apiStockService) {
         this.apiStockService = apiStockService;
     }
+
     /**
      * FEM: Makes an API call to fetch stock data and updates the provided Stock object with start and end values.
      *

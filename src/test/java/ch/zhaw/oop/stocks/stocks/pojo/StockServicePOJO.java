@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 /**
- * <h1>StockService</h1>
  * The class StockService contains some static methods to fetch data from the Stock API
  * In this case the provider twelvedata is used.
- * @author      Adrian Schaerer, Dominic Troll, Manuel Ferretti
- * @version     1.0
- * @since       2023-06-23
+ *
+ * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
+ * @version 1.0
+ * @since 2023 -06-23
  */
 @Service
 public class StockServicePOJO {
@@ -25,11 +25,23 @@ public class StockServicePOJO {
     // ADR: Refactored from the ApiStockController
     private final ApiStockService apiStockService;
 
+    /**
+     * Instantiates a new Stock service pojo.
+     *
+     * @param apiStockService the api stock service
+     */
     @Autowired
     public StockServicePOJO(ApiStockService apiStockService) {
         this.apiStockService = apiStockService;
     }
 
+    /**
+     * Make api call stock.
+     *
+     * @param stock the stock
+     * @return the stock
+     * @throws Exception the exception
+     */
     public Stock makeAPICall(Stock stock) throws Exception {
         double startValue = 0.0;
         double endValue = 0.0;
@@ -61,7 +73,14 @@ public class StockServicePOJO {
         return stock;
     }
 
-    // ADR: private method to check if there is a Stock available on this day otherwise look for the next one
+    /**
+     * Stock date check stock pojo.
+     *
+     * @param apiStockValueList the api stock value list
+     * @param stock             the stock
+     * @return the stock pojo
+     */
+// ADR: private method to check if there is a Stock available on this day otherwise look for the next one
     public static StockPOJO stockDateCheck(ApiStockValueListPOJO apiStockValueList, StockPOJO stock) {
 
         // ADR: Use a separate variable to check for a date which holds values

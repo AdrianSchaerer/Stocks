@@ -10,28 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+
 /**
- * <h1>CsvExporterController</h1>
  * <p>FEM: CSV Exporter controller class which is used to create new Exporters.</p>
  * <p>Acts as a controller for Angular frontend.</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
  */
-
 @RestController
 @RequestMapping("/exporter") // FEM: Base URL for all endpoints of this class.
 public class CsvExporterController {
 
     @Autowired
     private CsvExporter csvExporter;
+    /**
+     *
+     */
     @Autowired
     private Stock stock;
+
     /**
      * FEM: Exports stock data to a CSV file and returns the file URL as a response entity.
      *
-     * @return A ResponseEntity containing the file URL if the export is successful,
-     * or an error response with appropriate status code if there is an exception.
+     * @return A ResponseEntity containing the file URL if the export is successful, or an error response with appropriate status code if there is an exception.
      */
     @PostMapping("/export") // FEM: Endpoint mapping for CSV Export method. > URL /exporter/export
     public ResponseEntity<String> exportStockDataToCsv(){
@@ -50,15 +52,39 @@ public class CsvExporterController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error exporting stock data to CSV");
         }
     }
+
+    /**
+     * Gets csv exporter.
+     *
+     * @return the csv exporter
+     */
     public CsvExporter getCsvExporter() {
         return csvExporter;
     }
+
+    /**
+     * Sets csv exporter.
+     *
+     * @param csvExporter the csv exporter
+     */
     public void setCsvExporter(CsvExporter csvExporter) {
         this.csvExporter = csvExporter;
     }
+
+    /**
+     * Gets stock.
+     *
+     * @return the stock
+     */
     public Stock getStock() {
         return stock;
     }
+
+    /**
+     * Sets stock.
+     *
+     * @param stock the stock
+     */
     public void setStock(Stock stock) {
         this.stock = stock;
     }

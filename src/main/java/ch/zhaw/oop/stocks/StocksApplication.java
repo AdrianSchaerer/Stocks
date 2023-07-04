@@ -5,18 +5,20 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
- * <h1>StocksApplication (Main)</h1>
  * <p>FEM: A simple stock search engine that uses API calls to display time value of stocks.</p>
  * <p>Also provides the loss/gain for the defined period and exports the data to a CSV file.</p>
- *
- * @todo: Cleanup of all commented methods. But we keep it here for documentation reasons...
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
  */
-
 @SpringBootApplication(scanBasePackages={"ch.zhaw.oop.stocks"})
 public class StocksApplication {
+	/**
+	 * The entry point of application.
+	 *
+	 * @param args the input arguments
+	 * @throws Exception the exception
+	 */
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext context = SpringApplication.run(StocksApplication.class, args); // FEM: Start Spring Boot Application, load Beans and start Server
 //		StocksApplication app = context.getBean(StocksApplication.class); // FEM: Brings StocksApplication bean into Spring context. This makes it's methods accessible.

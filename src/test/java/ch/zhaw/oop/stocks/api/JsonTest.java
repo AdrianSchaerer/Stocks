@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Json test.
+ */
 class JsonTest {
 
     // ADR: Source is a Json String
@@ -17,18 +20,33 @@ class JsonTest {
             "}";
     private static JsonNode node;
 
+    /**
+     * Sets up.
+     *
+     * @throws JsonProcessingException the json processing exception
+     */
     @BeforeAll
     static void setUp() throws JsonProcessingException {
         node = Json.parse(simpleTestCaseJsonSource);
     }
 
-    // ADR: Testing the conversion from Json String to JsonNode class
+    /**
+     * Parse.
+     *
+     * @throws JsonProcessingException the json processing exception
+     */
+// ADR: Testing the conversion from Json String to JsonNode class
     @Test
     void parse() throws JsonProcessingException {
         assertEquals(node.get("title").asText(), "This is a title");
     }
 
-    // ADR: Testing the mapping from JsonNode class to a Java class
+    /**
+     * From json.
+     *
+     * @throws JsonProcessingException the json processing exception
+     */
+// ADR: Testing the mapping from JsonNode class to a Java class
     @Test
     void fromJson() throws JsonProcessingException {
         JsonPOJO pojo = Json.fromJson(node, JsonPOJO.class);

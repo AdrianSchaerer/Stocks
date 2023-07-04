@@ -7,6 +7,9 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Api stock service test.
+ */
 class ApiStockServiceTest {
 
     private final String earliestTimeStampSource = "{\n" +
@@ -14,6 +17,9 @@ class ApiStockServiceTest {
             "  \"unix_time\": 52200\n" +
             "}";
 
+    /**
+     *
+     */
     private final String stocksSource = "{\n" +
             "  \"data\": [\n" +
             "    {\n" +
@@ -64,6 +70,11 @@ class ApiStockServiceTest {
             "  \"status\": \"ok\"\n" +
             "}";
 
+    /**
+     * Stocks test.
+     *
+     * @throws JsonProcessingException the json processing exception
+     */
     @Test
     void stocksTest() throws JsonProcessingException {
         JsonNode node = Json.parse(stocksSource);
@@ -77,6 +88,11 @@ class ApiStockServiceTest {
         assertEquals("AACI",symbol);
     }
 
+    /**
+     * Earliest timestamp test.
+     *
+     * @throws JsonProcessingException the json processing exception
+     */
     @Test
     void earliestTimestampTest() throws JsonProcessingException {
         JsonNode node = Json.parse(earliestTimeStampSource);
@@ -84,6 +100,11 @@ class ApiStockServiceTest {
         assertEquals("1970-01-01", apiStockEarliestTimestamp.getDatetime().toString());
     }
 
+    /**
+     * Time series test.
+     *
+     * @throws JsonProcessingException the json processing exception
+     */
     @Test
     void timeSeriesTest() throws JsonProcessingException {
         JsonNode node = Json.parse(timeSeriesSource);

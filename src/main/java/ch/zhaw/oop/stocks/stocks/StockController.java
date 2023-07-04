@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <h1>StockController</h1>
  * <p>FEM: Stock object controller class which is used to create and get stock data.</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
@@ -13,14 +12,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class StockController {
 
+    /**
+     *
+     */
     private Stock stock;
     private final StockService stockService;
+
     /**
      * FEM: Constructor for the stock controller
      * Autoinjects stock when controller instance is created.
      * Provides proper initialization with required stock dependency.
      *
-     * @param stock The Stock object to be injected.
+     * @param stock        The Stock object to be injected.
      * @param stockService The StockService object to be injected.
      */
     @Autowired
@@ -28,6 +31,12 @@ public class StockController {
         this.stock = stock;
         this.stockService = stockService;
     }
+
+    /**
+     * Gets stock.
+     *
+     * @return the stock
+     */
     @GetMapping("/stocks") // FEM: Maps the GET Request to /stocks to the stock object.
     @ResponseBody
     public Stock getStock() {

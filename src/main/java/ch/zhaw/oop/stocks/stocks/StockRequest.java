@@ -2,7 +2,6 @@ package ch.zhaw.oop.stocks.stocks;
 import java.time.LocalDate;
 
 /**
- * <h1>StockRequest</h1>
  * <p>FEM: Represents a stock request containing the necessary data to create a stock.</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti

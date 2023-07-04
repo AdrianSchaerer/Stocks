@@ -13,9 +13,9 @@ import java.net.http.HttpResponse;
 import java.time.LocalDate;
 
 /**
- * <h1>ApiStockService</h1>
  * <p>The class ApiStockService contains some methods to fetch data from the web API</p>
  * <p>In this case the provider twelvedata is used.</p>
+ *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
  */
@@ -25,13 +25,18 @@ public class ApiStockService {
     private static final String HOSTNAME =  "https://api.twelvedata.com/";
     private static final String APIKEY =    "1ee05fe17c2a42cfbbda5dd11e8fa496";
 
+    /**
+     * Instantiates a new Api stock service.
+     */
     @Autowired
     public ApiStockService(){
 
     }
+
     /**
      * <p>stocks()</p>
      * <p>This method fetches a list of available stocks</p>
+     *
      * @return object ApiDescriptionList with a list of objects StockDescription
      */
     public ApiStockDescriptionList stocks(){
@@ -53,6 +58,7 @@ public class ApiStockService {
     /**
      * <p>earliestTimestamp()</p>
      * <p>This method fetches the date since when the specific stock is traded on the market.</p>
+     *
      * @param symbol of the stock
      * @return object StockEarliestTimestamp
      */
@@ -77,9 +83,10 @@ public class ApiStockService {
     /**
      * <p>timeSeries(...)</p>
      * <p>This method fetches data in between a start and an end date of a specific stock.</p>
-     * @param symbol of the stock
+     *
+     * @param symbol    of the stock
      * @param startDate start date
-     * @param endDate end date
+     * @param endDate   end date
      * @return object StockValueList which contains a list of StockValues
      */
     public ApiStockValueList timeSeries(String symbol, LocalDate startDate, LocalDate endDate) {

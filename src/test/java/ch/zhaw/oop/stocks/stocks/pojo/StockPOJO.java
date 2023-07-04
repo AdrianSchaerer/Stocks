@@ -26,6 +26,9 @@ public class StockPOJO {
     private String stockName;
     private double startValue, endValue, investValue, finalValue, gainLossValue;
 
+    /**
+     * Instantiates a new Stock pojo.
+     */
     public StockPOJO() {
         this.startDate = LocalDate.of(1900, 01, 01);
         this.endDate = LocalDate.of(2999, 01, 01);;
@@ -39,6 +42,11 @@ public class StockPOJO {
 
     /**
      * FEM: Create a stock object. Fills the object with placeholder (default) data.
+     *
+     * @param startDate   the start date
+     * @param endDate     the end date
+     * @param stockName   the stock name
+     * @param investValue the invest value
      */
     public void setStockFromWeb(LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
         this.startDate = startDate;
@@ -52,12 +60,28 @@ public class StockPOJO {
         System.out.println("Stock Name von Web-Eingabe: " + stockName);
         System.out.println("Investierter Betrag von Web-Eingabe: " + investValue);
     }
+
+    /**
+     * Sets stock from csv.
+     *
+     * @param startDate   the start date
+     * @param endDate     the end date
+     * @param stockName   the stock name
+     * @param investValue the invest value
+     */
     public void setStockFromCSV(LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.stockName = stockName;
         this.investValue = investValue;
     }
+
+    /**
+     * Sets stock from api.
+     *
+     * @param startValue the start value
+     * @param endValue   the end value
+     */
     public void setStockFromAPI(double startValue, double endValue) {
         this.startValue = startValue;
         this.endValue = endValue;
@@ -89,6 +113,10 @@ public class StockPOJO {
         System.out.println("Berechneter finaler Wert: " + finalValue);
         System.out.println("Berechneter Verlust oder Gewinn: " + gainLossValue);
     }
+
+    /**
+     * Create stock object.
+     */
     public void createStockObject() {
         // Placeholder method to create a stock object
         startDate = LocalDate.of(0000, 0, 0);
@@ -101,66 +129,146 @@ public class StockPOJO {
         gainLossValue = 0.0;
     }
     // FEM: Getters and Setters
-    /** FEM: Getter for the current startDate. */
+
+    /**
+     * FEM: Getter for the current startDate.  @return the start date
+     *
+     * @return the start date
+     */
     public LocalDate getStartDate() {
         return startDate;
     }
-    /** FEM: Setter for the current startDate. */
+
+    /**
+     * FEM: Setter for the current startDate.  @param startDate the start date
+     *
+     * @param startDate the start date
+     */
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
-    /** FEM: Getter for the current endDate.  */
+
+    /**
+     * FEM: Getter for the current endDate.   @return the end date
+     *
+     * @return the end date
+     */
     public LocalDate getEndDate() {
         return endDate;
     }
-    /** FEM: Setter for the current endDate. */
+
+    /**
+     * FEM: Setter for the current endDate.  @param endDate the end date
+     *
+     * @param endDate the end date
+     */
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-    /** FEM: Getter for the current stockName. */
+
+    /**
+     * FEM: Getter for the current stockName.  @return the stock name
+     *
+     * @return the stock name
+     */
     public String getStockName() {
         return stockName;
     }
-    /** FEM: Setter for the current stockName. */
+
+    /**
+     * FEM: Setter for the current stockName.  @param stockName the stock name
+     *
+     * @param stockName the stock name
+     */
     public void setStockName(String stockName) {
         this.stockName = stockName;
     }
-    /** FEM: Getter for the current startValue. */
+
+    /**
+     * FEM: Getter for the current startValue.  @return the start value
+     *
+     * @return the start value
+     */
     public double getStartValue() {
         return startValue;
     }
-    /** FEM: Setter for the current startValue. */
+
+    /**
+     * FEM: Setter for the current startValue.  @param startValue the start value
+     *
+     * @param startValue the start value
+     */
     public void setStartValue(double startValue) {
         this.startValue = startValue;
     }
-    /** FEM: Getter for the current endValue. */
+
+    /**
+     * FEM: Getter for the current endValue.  @return the end value
+     *
+     * @return the end value
+     */
     public double getEndValue() {
         return endValue;
     }
-    /** FEM: Setter for the current endValue. */
+
+    /**
+     * FEM: Setter for the current endValue.  @param endValue the end value
+     *
+     * @param endValue the end value
+     */
     public void setEndValue(double endValue) {
         this.endValue = endValue;
     }
-    /** FEM: Getter for the current investValue. */
+
+    /**
+     * FEM: Getter for the current investValue.  @return the invest value
+     *
+     * @return the invest value
+     */
     public double getInvestValue() {
         return investValue;
     }
-    /** FEM: Setter for the current investValue.   */
+
+    /**
+     * FEM: Setter for the current investValue.    @param investValue the invest value
+     *
+     * @param investValue the invest value
+     */
     public void setInvestValue(double investValue) {
         this.investValue = investValue;
     }
-    /** FEM: Getter for the current finalValue. */
+
+    /**
+     * FEM: Getter for the current finalValue.  @return the final value
+     *
+     * @return the final value
+     */
     public double getFinalValue() {
         return finalValue;
     }
-    /** FEM: Setter for the current finalValue.   */
+
+    /**
+     * FEM: Setter for the current finalValue.    @param finalValue the final value
+     *
+     * @param finalValue the final value
+     */
     public void setFinalValue(double finalValue) {this.finalValue = finalValue;
     }
-    /** FEM: Getter for the current gainLossValue. */
+
+    /**
+     * FEM: Getter for the current gainLossValue.  @return the gain loss value
+     *
+     * @return the gain loss value
+     */
     public double getGainLossValue() {
         return gainLossValue;
     }
-    /** FEM: Setter for the current gainLossValue.   */
+
+    /**
+     * FEM: Setter for the current gainLossValue.    @param gainLossValue the gain loss value
+     *
+     * @param gainLossValue the gain loss value
+     */
     public void setGainLossValue(double gainLossValue) {
         this.gainLossValue = gainLossValue;
     }

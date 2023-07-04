@@ -17,9 +17,8 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * <h1>CsvImporterController</h1>
- * @todo: This class is only a placeholder to be implemented.
  * <p>FEM: CSV Importer controller class which is used to create new Importers</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
@@ -28,13 +27,27 @@ import java.util.List;
 @RestController
 public class CsvImporterController {
 
+    /**
+     *
+     */
     private final CsvImporter csvImporter;
 
+    /**
+     * Instantiates a new Csv importer controller.
+     *
+     * @param csvImporter the csv importer
+     */
     @Autowired
     public CsvImporterController(CsvImporter csvImporter) {
         this.csvImporter = csvImporter;
     }
 
+    /**
+     * Import csv response entity.
+     *
+     * @param file the file
+     * @return the response entity
+     */
     @PostMapping("/importer")
     public ResponseEntity<Stock> importCsv(@RequestPart("file") MultipartFile file) {
         try {

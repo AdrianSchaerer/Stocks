@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 /**
- * <h1>WebMvcConfig</h1>
  * <p>FEM: Configuration class for Spring Web MVC.</p>
  * <p>Enables Cross-Origin Resource Sharing (CORS) for all URL mappings.</p>
  *

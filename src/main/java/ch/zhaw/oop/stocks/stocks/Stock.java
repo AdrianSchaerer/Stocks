@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 /**
- * <h1>Stock</h1>
  * <p>FEM: Stock object class which is used to hold the stock data.</p>
  * <p>This class represents a stock with its properties and methods for setting and retrieving data.</p>
  *

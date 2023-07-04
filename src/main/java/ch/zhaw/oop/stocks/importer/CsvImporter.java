@@ -10,9 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.time.LocalDate;
+
 /**
- * <h1>CsvImporter</h1>
- * @todo: This class is only a placeholder to be implemented.
  * <p>FEM: This class is used to perform basic CSV importer tasks.</p>
  * <p>Imports data from CSV file located in /resources/csvimport/</p>
  *
@@ -22,6 +21,12 @@ import java.time.LocalDate;
 @Component
 public class CsvImporter {
 
+    /**
+     * Import data stock.
+     *
+     * @param file the file
+     * @return stock stock
+     */
     public Stock importData(MultipartFile file) {
         try (CSVReader csvReader = new CSVReader(new InputStreamReader(file.getInputStream()))) {
             // Read the CSV file and extract the required data
