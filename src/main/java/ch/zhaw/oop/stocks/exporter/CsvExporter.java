@@ -1,14 +1,12 @@
 package ch.zhaw.oop.stocks.exporter;
 
 import ch.zhaw.oop.stocks.stocks.Stock;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -73,8 +71,7 @@ public class CsvExporter {
             });
 
             // Generate download URL for frontend
-            String fileUrl = "http://localhost:4200/assets/csvexport/" + filename;
-            return fileUrl;
+            return "http://localhost:4200/assets/csvexport/" + filename;
         } catch (IOException e) {
             // Re-throw the exception with the correct type
             throw new IOException("File not found", e);
@@ -89,4 +86,41 @@ public class CsvExporter {
     public Stock getStock() {
         return stock;
     }
+
+
+/*      @Deprecated
+        // Old CSV Exporter Code:
+        public String exportStockData(Stock stock) throws IOException {
+        if (stock == null) {
+            throw new IOException("Stock object is null");
+        }
+
+        String filename = stock.getStartDate() + "_" + stock.getEndDate() + "_" + stock.getStockName() + ".csv";
+        String filePath = "src/main/resources/csvexport/" + filename;
+        File file = new File(filePath);
+
+        try (FileWriter writer = new FileWriter(file)) {
+            // Write the header
+            writer.write("startDate,endDate,stockName,startValue,endValue,investValue,finalValue,gainLossValue\n");
+
+            // Write the data row
+            writer.write(stock.getStartDate().toString() + "," +
+                    stock.getEndDate().toString() + "," +
+                    stock.getStockName() + "," +
+                    stock.getStartValue() + "," +
+                    stock.getEndValue() + "," +
+                    stock.getInvestValue() + "," +
+                    stock.getFinalValue() + "," +
+                    stock.getGainLossValue() + "\n");
+
+            // Generate download URL for frontend
+            String fileUrl = "http://localhost:8080/csvexport/" + filename;
+            return fileUrl;
+        } catch (IOException e) {
+            // Re-throw the exception with the correct type
+            throw new IOException("File not found", e);
+        }
+    }*/
+
+
 }

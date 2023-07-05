@@ -1,17 +1,30 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
   <div class="header">
     <header class="header">
-      <h1 class="header-title">Stock Search Engine</h1>
-      <h2 class="header-subtitle">Ugly, but it works...</h2>
+      <picture>
+        <source srcset="./assets/images/logo-no-background.png" type="image/png">
+        <img class="header-logo" src="./assets/images/logo-no-background.png" alt="Stock Search Engine Logo" (load)="hideHeadings()" (error)="showHeadings()">
+      </picture>
+      <ng-container *ngIf="!isLogoLoaded">
+        <h1 class="header-title">Stock Search Engine</h1>
+        <h2 class="header-subtitle">Ugly, but it works...</h2>
+      </ng-container>
     </header>
   </div>
 
+
   <div class="left-content">
-    <!-- Left content -->
+    <div class="ad-container">
+      <p class="ad-description">Place your Ad here...</p>
+      <img src="./assets/images/ad1.png" alt="Advertisement 1" class="ad-image" />
+    </div>
   </div>
 
   <div class="right-content">
-    <!-- Right content -->
+    <div class="ad-container">
+      <p class="ad-description">Place your Ad here...</p>
+      <img src="./assets/images/ad2.jpg" alt="Advertisement 2" class="ad-image" />
+    </div>
   </div>
 
   <div class="center-content">
@@ -112,7 +125,8 @@
       <p>Invest Value: {{ investValue }}$</p>
       <p>Final Value: {{ finalValue }}$</p>
       <p>Gain/Loss Value: {{ gainLossValue }}$</p>
-
+      <br>
+      <br>
       <button onClick="window.location.reload();" class="button">Start Over</button>
       <br>
       <br>

@@ -138,5 +138,16 @@ export class AppComponent implements OnInit {
   refreshPage() {
     window.location.reload();
   }
+
+// Logo is loaded. If not, show headings instead:
+  isLogoLoaded = false;
+
+  hideHeadings() {
+    this.isLogoLoaded = true;
+  }
+
+  showHeadings() {
+    this.isLogoLoaded = false;
+  }
 }
 

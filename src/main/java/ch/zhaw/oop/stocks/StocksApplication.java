@@ -21,6 +21,7 @@ public class StocksApplication {
 	 */
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext context = SpringApplication.run(StocksApplication.class, args); // FEM: Start Spring Boot Application, load Beans and start Server
+// @Deprecated
 //		StocksApplication app = context.getBean(StocksApplication.class); // FEM: Brings StocksApplication bean into Spring context. This makes it's methods accessible.
 
 		// FEM: Retrieve the Stock, CsvImporter and CsvExporter beans from the application context
@@ -41,13 +42,7 @@ public class StocksApplication {
 	}
 
 
-//	/** FEM: Creates a new Stock object. The parameters may be passed over from other methods.
-//	 * @param stock new stock object to be created.
-//	 * @param startDate LocalDate start stock search period.
-//	 * @param endDate LocalDate end stock search period.
-//	 * @param stockName String unique stock name identifier.
-//	 * @param investValue double user defined investment value (usually USD for US stock exchange).
-//	 */
+// @Deprecated
 //	private static void createStockObject(ch.zhaw.oop.stocks.stocks.Stock stock, LocalDate startDate, LocalDate endDate, String stockName, double investValue) {
 //		stock.setStartDate(startDate);
 //		stock.setEndDate(endDate);
@@ -96,11 +91,7 @@ public class StocksApplication {
 //		}
 //	}
 //
-//	/** FEM: Exports the stock object's data to a CSV file and returns a download url.
-//	 * @param context Ensures that the application context from main method is used.
-//	 * @param stock created stock object.
-//	 * @return downloadURL as a String
-//	 */
+//	// @Deprecated
 //	private static String exportStockDataToCSV(Stock stock, ConfigurableApplicationContext context) throws Exception {
 //		try {
 //			CsvExporter csvExporter = context.getBean(CsvExporter.class);

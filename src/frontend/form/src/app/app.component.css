@@ -1,11 +1,21 @@
-
-/* Update the color scheme */
-body, html {
-  background-color: #373B3F;
+/* CSS Reset */
+* {
   margin: 0;
   padding: 0;
-  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Update the color scheme */
+body, html, .grid {
+  background-color: #EFFAFD;
   height: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Lato', sans-serif;
+  min-height: 100vh;
+  margin: 0;
 }
 
 p,
@@ -14,26 +24,39 @@ h1, h2, h3, h4 {
   font-family: 'Lato', sans-serif;
 }
 
-/* Set the font */
-body {
-  font-family: 'Lato', sans-serif;
-}
-
 /* Create a grid container */
 .container {
   display: grid;
-  grid-template-rows: minmax(150px, 18%) minmax(1000px, 75%) minmax(50px, 7%); /* Header, Content, Footer */
-  grid-template-columns: 20% 1fr 20%; /* Left, Center, Right */
-  gap: 0;
-  height: 100%; /* Set the container height to 100% */
+  grid-template-columns: 20% minmax(550px, 1fr) 20%;
+  grid-template-rows: minmax(150px, 15%) minmax(600px, 1fr) minmax(100px, 10%);
+  gap: 0 0;
+  grid-template-areas:
+    "header header header"
+    "left-content center-content right-content"
+    "footer footer footer";
+  height: 95vh; /* Set the height to the full viewport height */
+  width: 95vw; /* Set the width to the full viewport width */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  grid-gap:10px;
 }
+/* Grid template area assignment */
+.header { grid-area: header; }
+.footer { grid-area: footer; }
+.left-content { grid-area: left-content; background-color: #F4FDFF; padding: 20px; display: flex; justify-content: center;}
+.center-content { grid-area: center-content; }
+.right-content { grid-area: right-content; background-color: #F4FDFF; padding: 20px; display: flex; justify-content: center;}
 
 
 /* Header */
 .header {
   grid-row: 1;
   grid-column: 1 / -1; /* Span all columns */
-  background-color: #373B3F;
+  background-color: #2A3544;
   color: #ffffff;
   padding: 10px;
   margin: 0;
@@ -43,13 +66,6 @@ body {
   flex-direction: column;
   justify-content: center;
 }
-.header {
-  background-color: #373B3F;
-  color: #ffffff;
-  padding: 10px;
-  text-align: center;
-}
-
 
 .header-title {
   font-size: 32px;
@@ -67,7 +83,7 @@ body {
 .footer {
   grid-row: 3;
   grid-column: 1 / -1; /* Span all columns */
-  background-color: #373B3F;
+  background-color: #2A3544;
   color: #ffffff;
   padding: 50px;
   margin: 0;
@@ -78,7 +94,7 @@ body {
   box-sizing: border-box;
   text-align: right;
   width: 100%; /* Set the width to 100% */
-  position: fixed; /* Set the position to fixed */
+  position: relative; /* Change position to sticky */
   bottom: 0; /* Position at the bottom */
 }
 
@@ -105,13 +121,13 @@ body {
   text-decoration: none;
   padding: 5px 10px;
   border-radius: 4px;
-  background-color: #686f75;
+  background-color: #43556D;
 }
 
 .footer ul li a:hover,
 .footer ul li a:active {
   color: #ffffff;
-  background-color: #686f75;
+  background-color: #677C98;
 }
 .authors {
   text-align: center;
@@ -125,47 +141,31 @@ body {
   text-align: right;
 }
 
-/* Left content */
-.left-content {
-  grid-row: 2;
-  grid-column: 1;
-  background-color: #E4ECF2;
-  padding: 20px;
-}
-
-/* Right content */
-.right-content {
-  grid-row: 2;
-  grid-column: 3;
-  background-color: #E4ECF2;
-  padding: 20px;
-}
-
 /* Center content */
 .center-content {
   grid-row: 2;
   grid-column: 2;
-  background-color: #F5FCFF;
+  background-color: #ECFBFF;
   padding: 50px;
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 /* Apply styles to the form */
 .form {
   font-family: 'Lato', sans-serif;
   border-radius: 6px;
-  background-color: #DCECF7;
-  padding: 50px;
-  width: 100%; /* Set the form width to 100% */
-  max-width: 450px; /* Limit the maximum width to 1800px */
-  max-height: 100%;
-  box-sizing: border-box;
+  background-color: #D0ECFF;
+  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box; /* Change box-sizing to border-box */
 }
 
 .form h2 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #333333;
 }
 
@@ -179,9 +179,9 @@ body {
 .form input,
 .form select {
   width: 80%;
-  padding: 10px 20px;
+  padding: 7px 20px;
   margin: 8px 0;
-  border: 1px solid #ccc;
+  border: 1px solid #B1B5CE;
   border-radius: 6px;
   font-size: 16px;
   color: #333333;
@@ -191,10 +191,6 @@ body {
   background-color: #007bff;
   color: #ffffff;
   cursor: pointer;
-}
-
-.form input[type="submit"]:hover {
-  background-color: #0069d9;
 }
 
 .form span {
@@ -218,37 +214,6 @@ body {
   color: #333333;
 }
 
-.results button {
-  background-color: #007bff;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.button {
-  background-color: #007bff;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-/* Non-Form Buttons */
-.button:hover {
-  background-color: #0069d9;
-}
-
-.button:hover {
-  background-color: #0069d9;
-}
-
-.results button:hover {
-  background-color: #4459F2;
-}
-
 /* Add colorful elements */
 .form input,
 .form select,
@@ -257,9 +222,28 @@ body {
 }
 
 .form input:hover,
-.form select:hover,
-.results button:hover {
-  background-color: #D2ECFF;
+.form select:hover {
+  background-color: #E9F7FF;
+}
+
+/* Buttons */
+.button, .results button, .form input[type="submit"] {
+  background-color: #4B7BFF;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+/* Button hover*/
+.button:hover, .results button:hover,.form input:hover[type="submit"] {
+  background-image: linear-gradient(to top, #4B7BFF, #5496FF);
+  box-shadow: 0 0 5px dodgerblue;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .form input:focus,
@@ -272,3 +256,27 @@ body {
 .form span {
   color: #dc3545;
 }
+
+/* Header Logo */
+.header-logo {
+  width: auto; /* Adjust the width value as needed */
+  height: 120px; /* Auto adjust the height to maintain aspect ratio */
+}
+
+/* Advertisement example image */
+.ad-image {
+  width: 90%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+.ad-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #E9F7FF;
+  padding: 10px;
+  height: fit-content;
+  background: #E9F7FF;
+}
+.ad-container .ad-description{color: #93BCD2;}
