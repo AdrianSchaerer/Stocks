@@ -1,3 +1,9 @@
+/** This file contains the code for the root component of the application.
+ * It contains the code for the form and the code to make the POST call to the backend.
+ * It also contains the code to extract the values from the response object and store them in the component properties.
+ * The code to export the stock data to a CSV file and download it, is also included in this file.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
