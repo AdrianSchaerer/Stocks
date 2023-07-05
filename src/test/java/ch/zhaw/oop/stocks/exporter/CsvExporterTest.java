@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 /**
- * The type Csv exporter test.
+ * FEM: The Csv exporter test.
  */
 public class CsvExporterTest {
     @Mock
@@ -25,7 +25,7 @@ public class CsvExporterTest {
     private CsvExporter csvExporter;
 
     /**
-     * Sets .
+     * Sets up
      */
     @BeforeEach
     public void setup() {
@@ -85,9 +85,7 @@ public class CsvExporterTest {
         CsvExporter csvExporter = new CsvExporter(mockStock);
 
         // Assert that an IOException is thrown when exporting stock data with a null stock object
-        assertThrows(IOException.class, () -> {
-            csvExporter.exportStockData(mockStock, "test.csv");
-        }, "Stock object is null");
+        assertThrows(IOException.class, () -> csvExporter.exportStockData(mockStock, "test.csv"), "Stock object is null");
     }
 
     /**

@@ -1,10 +1,7 @@
 package ch.zhaw.oop.stocks.importer;
 import ch.zhaw.oop.stocks.stocks.Stock;
 import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,8 +9,8 @@ import java.io.*;
 import java.time.LocalDate;
 
 /**
- * <p>FEM: This class is used to perform basic CSV importer tasks.</p>
- * <p>Imports data from CSV file located in /resources/csvimport/</p>
+ * <p><p>FEM: This class is used to perform basic CSV importer tasks.</p>
+ * <p><p>Imports data from CSV file located in /resources/csvimport/</p>
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1

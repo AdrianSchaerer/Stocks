@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class StocksApplicationTests {
 
 	/**
-	 * Context loads.
+	 * Load Context.
 	 */
 	@Test
 	void contextLoads() {

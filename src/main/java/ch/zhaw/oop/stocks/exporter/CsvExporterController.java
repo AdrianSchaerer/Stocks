@@ -5,15 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
 /**
- * <p>FEM: CSV Exporter controller class which is used to create new Exporters.</p>
- * <p>Acts as a controller for Angular frontend.</p>
+ * FEM: CSV Exporter controller class which is used to create new Exporters.
+ * Acts as a controller for Angular frontend.
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
@@ -25,7 +24,8 @@ public class CsvExporterController {
     @Autowired
     private CsvExporter csvExporter;
     /**
-     *
+     * Injects Dependency of Stock into controller.
+     * Autowired searches for the according bean.
      */
     @Autowired
     private Stock stock;

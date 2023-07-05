@@ -8,6 +8,8 @@ import java.time.LocalDate;
  * <p>FEM: Stock object class which is used to hold the stock data.</p>
  * <p>This class represents a stock with its properties and methods for setting and retrieving data.</p>
  *
+ * This class is work in progress and currently not in use.
+ *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
  */
@@ -59,6 +61,8 @@ public class Stock {
 
     /**
      * FEM: Sets the stock data from a CSV file.
+     *
+     * Currently not used (for importer-purposes)
      *
      * @param startDate   The start date of the stock period.
      * @param endDate     The end date of the stock period.
@@ -113,10 +117,12 @@ public class Stock {
 
     /**
      * FEM: Creates a stock object with placeholder data.
+     *
+     * Currently not used, only for testing-purposes.
      */
     public void createStockObject() {
-        startDate = LocalDate.of(0, 0, 0);
-        endDate = LocalDate.of(0, 0, 0);
+        startDate = LocalDate.of(1900, 1, 1);
+        endDate = LocalDate.of(1900, 1, 1);
         stockName = "PLACEHOLDER";
         startValue = 0.0;
         endValue = 0.0;

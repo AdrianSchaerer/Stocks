@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class StockController {
 
     /**
-     *
+     * <p>FEM: Declares private Stock Variable. Could be autowired.
      */
+    @Autowired
     private Stock stock;
     private final StockService stockService;
 
@@ -33,7 +34,7 @@ public class StockController {
     }
 
     /**
-     * Gets stock.
+     * FEM: Returns stock.
      *
      * @return the stock
      */

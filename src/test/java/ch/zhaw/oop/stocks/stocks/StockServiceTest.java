@@ -14,19 +14,43 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
+/**
+ * The type Stock service test.
+ */
 class StockServiceTest {
 
-    // ADR: Request from Web
+    /**
+     * The Stock.
+     */
+// ADR: Request from Web
     Stock stock = new Stock();
-    // ADR: ApiStockValueList
+    /**
+     * The Api stock value list.
+     */
+// ADR: ApiStockValueList
     ApiStockValueList apiStockValueList = new ApiStockValueList();
-    // ADR: ApiStockValues
+    /**
+     * The Value 1.
+     */
+// ADR: ApiStockValues
     ApiStockValue value1 = new ApiStockValue();
+    /**
+     * The Value 2.
+     */
     ApiStockValue value2 = new ApiStockValue();
+    /**
+     * The Value 3.
+     */
     ApiStockValue value3 = new ApiStockValue();
-    // ADR: Adding the values to ArrayList
+    /**
+     * The List.
+     */
+// ADR: Adding the values to ArrayList
     List<ApiStockValue> list = new ArrayList<>();
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         stock.setStockName("AAPL");
@@ -50,6 +74,10 @@ class StockServiceTest {
         // ADR: Setting the List to apiStockValueList
         apiStockValueList.setValues(list);
     }
+
+    /**
+     * Stock date check test start date.
+     */
     @Test
     void stockDateCheckTestStartDate() {
         StockServicePOJO.stockDateCheck(apiStockValueList,stock);
@@ -58,6 +86,9 @@ class StockServiceTest {
         assertEquals(stock.getStartDate(), LocalDate.of(2021, 1, 4));
     }
 
+    /**
+     * Stock date check test end date.
+     */
     @Test
     void stockDateCheckTestEndDate() {
         StockServicePOJO.stockDateCheck(apiStockValueList,stock);

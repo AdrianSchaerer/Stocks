@@ -13,10 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 /**
- * The type Stock controller test.
+ * FEM: The Stock controller test.
  */
 public class StockControllerTest {
-    private Stock stock;
     private StockService stockService;
     private StockController stockController;
 

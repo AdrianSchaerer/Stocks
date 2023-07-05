@@ -9,11 +9,9 @@
 * [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
-* [Packages and Dependencies] (#packages-and-dependencies)
+* [Packages and Dependencies](#packages-and-dependencies)
 * [Acknowledgements](#acknowledgements)
 * [License](#license)
-<!-- * [License](#license) -->
-
 
 ## General Information
 - Purpose of the project:
@@ -38,19 +36,27 @@ The following features are currently implemented:
 
 
 ## Setup
-Clone this repo to your System and run npm install inside the angular directory to install all the dependencies for the frontend.
-To download and run npm install packages, you need an npm package manager. You can download it here: https://www.npmjs.com/get-npm or use node.js
+Clone this repo to your System and run the following command inside the angular directory to install all depencencies for the frontend:
+> npm install 
+> 
+To download and run npm install packages, you need an npm package manager. You can download it here:
+https://www.npmjs.com/get-npm
+
+...or use node.js
 
 ## Usage
->>>After you clone this repo to your System, go to its root directory and run npm install to install its dependencies.
->   Why install it twice?
+Please make sure you downloaded and installed all packaged requred. If necessary, you may have to rebuild the project.
 
-Once the dependencies are installed, you can run npm start to start the Backend application. With the ng serve command, the Frontend service is started.
+Once the dependencies are installed, you can run the full application with the following command:
+> npm start
+
+The Frontend service is started separately with the following command:
+> ng serve
+
 You will then be able to access it at https://localhost:4200
 
->>> npm start to run the backend?
-
-Make sure port 8080 is also open. It's used for the backend communication. To make the application work, you need to run both the frontend and the backend.
+**Important:**
+Make sure port 4200 is not used and port 8080 is also open. It's used for the backend communication. To make the application work, you need to run both the frontend and the backend.
 
 
 ## Project Status
@@ -90,34 +96,34 @@ To do:
 - Jackson Databind
 
 ### Backend:
-@angular/animations: ^16.0.0
-@angular/common: ^16.0.0
-@angular/compiler: ^16.0.0
-@angular/core: ^16.0.0
-@angular/forms: ^16.0.0
-@angular/platform-browser: ^16.0.0
-@angular/platform-browser-dynamic: ^16.0.0
-@angular/router: ^16.0.0
-angular-chart.js: ^1.1.1
-chart.js: ^2.9.4
-rxjs: ~7.8.0
-tslib: ^2.3.0
-zone.js: ~0.13.0
-@angular-devkit/build-angular: ^16.0.4
-@angular/cli: ~16.0.4
-@angular/compiler-cli: ^16.0.0
-@types/chart.js: ^2.9.31
-@types/jasmine: ~4.3.0
-jasmine-core: ~4.6.0
-karma: ~6.4.0
-karma-chrome-launcher: ~3.2.0
-karma-coverage: ~2.2.0
-karma-jasmine: ~5.1.0
-karma-jasmine-html-reporter: ~2.0.0
-typescript: ~5.0.2
+- @angular/animations: ^16.0.0
+- @angular/common: ^16.0.0
+- @angular/compiler: ^16.0.0
+- @angular/core: ^16.0.0
+- @angular/forms: ^16.0.0
+- @angular/platform-browser: ^16.0.0
+- @angular/platform-browser-dynamic: ^16.0.0
+- @angular/router: ^16.0.0
+- angular-chart.js: ^1.1.1
+- chart.js: ^2.9.4
+- rxjs: ~7.8.0
+- tslib: ^2.3.0
+- zone.js: ~0.13.0
+- @angular-devkit/build-angular: ^16.0.4
+- @angular/cli: ~16.0.4
+- @angular/compiler-cli: ^16.0.0
+- @types/chart.js: ^2.9.31
+- @types/jasmine: ~4.3.0
+- jasmine-core: ~4.6.0
+- karma: ~6.4.0
+- karma-chrome-launcher: ~3.2.0
+- karma-coverage: ~2.2.0
+- karma-jasmine: ~5.1.0
+- karma-jasmine-html-reporter: ~2.0.0
+- typescript: ~5.0.2
 
 ## Acknowledgements
-- Our sincere gratitude to Matthias Bachmann for his invaluable contribution as a lecturer.
+Our sincere gratitude to Matthias Bachmann for his invaluable contribution as a lecturer.
 
 ## License
 Copyright (c) Adrian Schärer, Dominic Troll and Manuel Ferretti

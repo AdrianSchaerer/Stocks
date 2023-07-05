@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import java.time.LocalDate;
 
 /**
- * The type Stock test.
+ * FEM: The Stock test.
  */
 @SpringBootTest
 public class StockTest {
@@ -15,7 +15,7 @@ public class StockTest {
     private static Stock mockStock;
 
     /**
-     * Sets .
+     * Sets up.
      */
     @BeforeEach
     public void setup() {

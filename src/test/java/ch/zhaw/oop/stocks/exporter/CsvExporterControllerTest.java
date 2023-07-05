@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
- * The type Csv exporter controller test.
+ * FEM: The Csv exporter controller test.
  */
 class CsvExporterControllerTest {
 
@@ -25,7 +25,7 @@ class CsvExporterControllerTest {
     private Stock stock;
 
     /**
-     *
+     * Private CsvExporterController
      */
     private CsvExporterController csvExporterController;
 

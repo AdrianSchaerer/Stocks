@@ -10,10 +10,10 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * <p>FEM: This class is used to perform basic CSV exporter tasks.</p>
- * <p>Exports data from Stock object as CSV file to /src/frontend/form/src/assets/csvexport/</p>
- * <p>Also generates an unique file name based on search query.</p>
- * <p>Files are overwritten if the same values are used.</p>
+ * FEM: This class is used to perform basic CSV exporter tasks.
+ * Exports data from Stock object as CSV file to /src/frontend/form/src/assets/csvexport/
+ * Also generates a unique file name based on search query.
+ * Files are overwritten if the same values are used.
  *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
@@ -79,7 +79,7 @@ public class CsvExporter {
     }
 
     /**
-     * Gets stock.
+     * FEM: Method to return stock.
      *
      * @return the stock
      */
@@ -89,7 +89,7 @@ public class CsvExporter {
 
 
 /*      @Deprecated
-        // Old CSV Exporter Code:
+        // FEM: Old CSV Exporter Code:
         public String exportStockData(Stock stock) throws IOException {
         if (stock == null) {
             throw new IOException("Stock object is null");

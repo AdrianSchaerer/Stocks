@@ -21,6 +21,8 @@ import java.util.List;
 /**
  * <p>FEM: CSV Importer controller class which is used to create new Importers</p>
  *
+ * This class is work in progress and currently not in use.
+ *
  * @author Adrian Schaerer, Dominic Troll, Manuel Ferretti
  * @version 0.1
  */
