@@ -45,7 +45,7 @@ https://www.npmjs.com/get-npm
 ...or use node.js
 
 ## Usage
-Please make sure you downloaded and installed all packaged requred. If necessary, you may have to rebuild the project.
+Please make sure you downloaded and installed all packaged required. If necessary, you may have to rebuild the project.
 
 Once the dependencies are installed, you can run the full application with the following command:
 > npm start
@@ -80,7 +80,7 @@ To do:
 - Add HTTPS security - and security overall. But Security was not part of the lecture. ;)
 
 ## Packages and Dependencies:
-### Frontend:
+### Backend
 - Spring Boot: Version 3.1.0
 - Java: Version 17
 - Spring Boot Starter Data REST
@@ -95,7 +95,7 @@ To do:
 - OpenCSV: Version 5.7.1
 - Jackson Databind
 
-### Backend:
+### Frontend    :
 - @angular/animations: ^16.0.0
 - @angular/common: ^16.0.0
 - @angular/compiler: ^16.0.0
