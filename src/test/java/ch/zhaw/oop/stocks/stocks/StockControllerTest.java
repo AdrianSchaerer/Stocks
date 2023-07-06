@@ -20,7 +20,6 @@ import static org.mockito.Mockito.*;
 public class StockControllerTest {
     private StockService stockService;
     private StockController stockController;
-    private Stocks stocks;
     private StocksServiceImpl stocksService;
 
     /**
@@ -30,7 +29,7 @@ public class StockControllerTest {
     public void setup() {
         stockService = mock(StockService.class);
         stockController = new StockController(new Stock(), stockService, stocksService);
-        stocks = new Stocks();
+        stocksService = mock(StocksServiceImpl.class);
     }
 
     /**
