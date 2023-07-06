@@ -1,6 +1,12 @@
 package ch.zhaw.oop.stocks.stocks;
 
+import ch.zhaw.oop.stocks.StocksApplication;
+import ch.zhaw.oop.stocks.model.Stocks;
+import ch.zhaw.oop.stocks.resource.StocksResource;
+import ch.zhaw.oop.stocks.service.implementation.StocksServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,6 +24,7 @@ public class StockController {
     @Autowired
     private Stock stock;
     private final StockService stockService;
+    private final StocksServiceImpl stocksService;
 
     /**
      * FEM: Constructor for the stock controller
@@ -28,9 +35,10 @@ public class StockController {
      * @param stockService The StockService object to be injected.
      */
     @Autowired
-    public StockController(Stock stock, StockService stockService) {
+    public StockController(Stock stock, StockService stockService, StocksServiceImpl stocksService) {
         this.stock = stock;
         this.stockService = stockService;
+        this.stocksService = stocksService;
     }
 
     /**
@@ -75,6 +83,21 @@ public class StockController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        
+        // ADR: To add the information to the database
+        Stocks stocksdb = new Stocks();
+
+        stocksdb.setStartDate(stock.getStartDate());
+        stocksdb.setEndDate(stock.getEndDate());
+        stocksdb.setStockName(stock.getStockName());
+        stocksdb.setStartValue(stock.getStartValue());
+        stocksdb.setEndValue(stock.getEndValue());
+        stocksdb.setInvestValue(stock.getInvestValue());
+        stocksdb.setFinalValue(stock.getFinalValue());
+        stocksdb.setGainLossValue(stock.getGainLossValue());
+
+        stocksService.create(stocksdb);
+        
         // ADR: Return stock with all completed Data.
         return stock;
     }

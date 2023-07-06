@@ -1,5 +1,7 @@
 package ch.zhaw.oop.stocks.stocks;
 
+import ch.zhaw.oop.stocks.model.Stocks;
+import ch.zhaw.oop.stocks.service.implementation.StocksServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.*;
 public class StockControllerTest {
     private StockService stockService;
     private StockController stockController;
+    private Stocks stocks;
+    private StocksServiceImpl stocksService;
 
     /**
      * Sets .
@@ -25,7 +29,8 @@ public class StockControllerTest {
     @BeforeEach
     public void setup() {
         stockService = mock(StockService.class);
-        stockController = new StockController(new Stock(), stockService);
+        stockController = new StockController(new Stock(), stockService, stocksService);
+        stocks = new Stocks();
     }
 
     /**
@@ -54,7 +59,7 @@ public class StockControllerTest {
         }
 
         // Act
-        Stock result = new StockController(stock, stockService).createStock(request);
+        Stock result = new StockController(stock, stockService, stocksService).createStock(request);
 
         // Assert
         assertEquals(request.getStartDate(), result.getStartDate());
