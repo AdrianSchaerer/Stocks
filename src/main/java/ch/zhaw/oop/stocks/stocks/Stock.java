@@ -1,5 +1,6 @@
 package ch.zhaw.oop.stocks.stocks;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
  * @version 0.1
  */
 @Component
+@RequiredArgsConstructor // ADR: Lombok annotation for constructor injection
 public class Stock {
     private LocalDate startDate;
     private LocalDate endDate;
@@ -23,20 +25,6 @@ public class Stock {
     private double investValue;
     private double finalValue;
     private double gainLossValue;
-
-    /**
-     * FEM: Constructor for creating a Stock object with default values.
-     */
-    public Stock() {
-        this.startDate = LocalDate.of(1900, 1, 1);
-        this.endDate = LocalDate.of(2999, 1, 1);
-        this.stockName = "Default";
-        this.startValue = 0.0;
-        this.endValue = 0.0;
-        this.investValue = 0.0;
-        this.finalValue = 0.0;
-        this.gainLossValue = 0.0;
-    }
 
     /**
      * FEM: Sets the stock data from a web input.

@@ -29,11 +29,10 @@ export class AppComponent implements OnInit {
   investValue: number;
   finalValue: number;
   gainLossValue: number;
-
+  availableStocks: {[key: string]: string};
 
 // TRD: inject the HttpClient service
   constructor(private http: HttpClient) {}
-
 
 // TRD: In this method, we initialize the reactiveForm property with a new instance of the FormGroup class.
   ngOnInit() {
@@ -43,8 +42,12 @@ export class AppComponent implements OnInit {
       endDate: new FormControl(null, Validators.required),
       stockName: new FormControl(null, Validators.required),
     });
+    this.http
+      .get('http://localhost:8080/apiStocks')
+      .subscribe((response:any) => {
+        this.availableStocks = response;
+      });
   }
-
 
 // TRD: The onSubmit method is a function that is called when the form is submitted.
   onSubmit() {
@@ -54,18 +57,6 @@ export class AppComponent implements OnInit {
       endDate: this.reactiveForm.get('endDate').value,
       stockName: this.reactiveForm.get('stockName').value,
     };
-
-
-
-    /** Replaced by the code below
-     *
-     this.http
-      .post('http://localhost:8080/stocks', formData)
-      .subscribe({
-        next: (response) => console.log(response),
-        error: (error) => console.log(error),
-      });
-     **/
 
     // TRD: Make the POST Call to the backend to get the data from the API.
     this.http
@@ -92,7 +83,6 @@ export class AppComponent implements OnInit {
     this.finalValue = response.finalValue;
     this.gainLossValue = response.gainLossValue;
 
-
     // Work with the extracted values as needed
     console.log(this.startDate);
     console.log(this.endDate);
@@ -102,17 +92,8 @@ export class AppComponent implements OnInit {
     console.log(this.investValue);
     console.log(this.finalValue);
     console.log(this.gainLossValue);
-
-    /** Not needed calculations are made in the backend
-     *
-    const profit = this.finalValue - this.investValue;
-    const roi = (profit / this.investValue) * 100;
-
-    console.log(profit);
-    console.log(roi);
-     **/
-
   }
+
 // FEM: Export the stock data to a CSV file
   exportStockData(): void {
     const apiUrl = 'http://localhost:8080/exporter/export';

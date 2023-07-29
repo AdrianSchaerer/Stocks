@@ -2,6 +2,7 @@ package ch.zhaw.oop.stocks.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +21,10 @@ import java.time.LocalDate;
  * @version 0.1
  */
 @Service
+@NoArgsConstructor
 public class ApiStockService {
-
     private static final String HOSTNAME =  "https://api.twelvedata.com/";
     private static final String APIKEY =    "1ee05fe17c2a42cfbbda5dd11e8fa496";
-
-    /**
-     * Instantiates a new Api stock service.
-     */
-    @Autowired
-    public ApiStockService(){
-
-    }
 
     /**
      * <p>stocks()</p>
