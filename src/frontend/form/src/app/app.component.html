@@ -1,31 +1,19 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
-  <div class="header">
-    <header class="header">
-      <picture>
-        <source srcset="./assets/images/logo-no-background.png" type="image/png">
-        <img class="header-logo" src="./assets/images/logo-no-background.png" alt="Stock Search Engine Logo" (load)="hideHeadings()" (error)="showHeadings()">
-      </picture>
-      <ng-container *ngIf="!isLogoLoaded">
-        <h1 class="header-title">Stock Search Engine</h1>
-        <h2 class="header-subtitle">Ugly, but it works...</h2>
-      </ng-container>
-    </header>
-  </div>
+  <app-header></app-header>
 
+<!--  <div class="left-content">-->
+<!--    <div class="ad-container">-->
+<!--      <p class="ad-description">Place your Ad here...</p>-->
+<!--      <img src="./assets/images/ad1.png" alt="Advertisement 1" class="ad-image" />-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="left-content">
-    <div class="ad-container">
-      <p class="ad-description">Place your Ad here...</p>
-      <img src="./assets/images/ad1.png" alt="Advertisement 1" class="ad-image" />
-    </div>
-  </div>
-
-  <div class="right-content">
-    <div class="ad-container">
-      <p class="ad-description">Place your Ad here...</p>
-      <img src="./assets/images/ad2.jpg" alt="Advertisement 2" class="ad-image" />
-    </div>
-  </div>
+<!--  <div class="right-content">-->
+<!--    <div class="ad-container">-->
+<!--      <p class="ad-description">Place your Ad here...</p>-->
+<!--      <img src="./assets/images/ad2.jpg" alt="Advertisement 2" class="ad-image" />-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="center-content">
 
@@ -92,6 +80,8 @@
       <br>
       <br>
       <button (click)="exportStockData()" class="button">Export CSV</button>
+      <br>
+<!--   Adr:   Table with results    -->
     </div>
 
     <!-- Not needed everything will be shown on one page
@@ -109,17 +99,6 @@
   </div>
 
   <!-- A Footer on the page with some information about this project -->
-  <div class="footer">
-    <div>
-      <ul>
-        <li><a href="http://localhost:4200">Home</a></li>
-      </ul>
-    </div>
-    <div>
-      <p>&copy; 2023 Stock Search project</p>
-      <p class="authors">Authors: Adrian Schärer, Dominic Troll and Manuel Ferretti</p>
-      <p class="authors">Application created as project in ZHAW CAS Object Oriented Programming.</p>
-    </div>
-  </div>
+  <app-footer></app-footer>
 
 </div>

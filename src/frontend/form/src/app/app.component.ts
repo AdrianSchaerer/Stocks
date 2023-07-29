@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
       endDate: new FormControl(null, Validators.required),
       stockName: new FormControl(null, Validators.required),
     });
+    // ADR: The availableStocks property is initialized with the data from the API.
     this.http
       .get('http://localhost:8080/apiStocks')
       .subscribe((response:any) => {
@@ -126,15 +127,8 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-// Logo is loaded. If not, show headings instead:
-  isLogoLoaded = false;
 
-  hideHeadings() {
-    this.isLogoLoaded = true;
-  }
 
-  showHeadings() {
-    this.isLogoLoaded = false;
-  }
+
 }
 

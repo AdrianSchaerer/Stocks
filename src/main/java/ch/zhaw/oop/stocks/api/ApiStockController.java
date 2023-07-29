@@ -21,7 +21,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class ApiStockController {
-    /**
+    /*
      * The Api stock service.
      */
     ApiStockService apiStockService;
@@ -41,7 +41,6 @@ public class ApiStockController {
      *
      * @return string
      */
-// ADR: not implemented yet -> to get a list of available stocks for web
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/apiStocks")
     public Map<String,String> availableStocks(){
@@ -63,4 +62,6 @@ public class ApiStockController {
         // return list
 
     }
+
+
 }
