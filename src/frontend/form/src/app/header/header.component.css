@@ -1,0 +1,31 @@
+.header {
+  grid-row: 1;
+  grid-column: 1 / -1; /* Span all columns */
+  background-color: #2A3544;
+  color: #ffffff;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  align-items: self-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header-title {
+  font-size: 32px;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.header-subtitle {
+  font-size: 18px;
+  font-style: italic;
+  color: #ffffff;
+}
+
+/* Header Logo */
+.header-logo {
+  width: auto; /* Adjust the width value as needed */
+  height: 120px; /* Auto adjust the height to maintain aspect ratio */
+}

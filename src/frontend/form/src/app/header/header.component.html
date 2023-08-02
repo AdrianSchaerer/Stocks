@@ -1,0 +1,12 @@
+<div class="header">
+  <header class="header">
+    <picture>
+      <source srcset="./assets/images/logo-no-background.png" type="image/png">
+      <img class="header-logo" src="./assets/images/logo-no-background.png" alt="Stock Search Engine Logo" (load)="hideHeadings()" (error)="showHeadings()">
+    </picture>
+    <ng-container *ngIf="!isLogoLoaded">
+      <h1 class="header-title">Stock Search Engine</h1>
+      <h2 class="header-subtitle">Ugly, but it works...</h2>
+    </ng-container>
+  </header>
+</div>
