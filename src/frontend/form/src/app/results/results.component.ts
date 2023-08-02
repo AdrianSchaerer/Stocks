@@ -4,6 +4,7 @@
 
 import { Component, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 // import { Chart, ChartData, ChartOptions } from 'chart.js';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-results',
@@ -22,12 +23,23 @@ export class ResultsComponent implements AfterViewInit {
   @Input() finalValue: number;
   @Input() gainLossValue: number;
 
+  response: any;
+
+  constructor(private http: HttpClient) {}
+
+
+
   // TRD: The Chart on the web does not work.
 //  @ViewChild('chartCanvas') chartCanvas: ElementRef;
 //  private chart: Chart;
 
   ngAfterViewInit() {
 //    this.createChart();
+    this.http
+      .get('http://localhost:8080/stocksNew/list')
+      .subscribe((response:any) => {
+        this.availableStocks = response.;
+      });
   }
 
   // TRD: The createChart method creates a new Chart instance and renders it on the canvas element.

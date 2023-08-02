@@ -7,6 +7,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {StockService} from "./service/stock.service";
+import {AppState} from "./interface/app-state";
+import {CustomResponse} from "./interface/custom-response";
+import {map, Observable, of, startWith} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {DataState} from "./enum/data-state.enum";
 
 
 // TRD: root component of the application
@@ -18,6 +24,8 @@ import { HttpClient } from '@angular/common/http';
 
 // TRD: implements OnInit interface to initialize the component with a form
 export class AppComponent implements OnInit {
+  appState$: Observable<AppState<CustomResponse>>;  // ADR : new code
+
   title = 'ReactiveForms';
   reactiveForm: FormGroup;
   apiResponse: any;
@@ -29,13 +37,28 @@ export class AppComponent implements OnInit {
   investValue: number;
   finalValue: number;
   gainLossValue: number;
+
+  // Adr: The availableStocks property is initialized with the data from the API.
   availableStocks: {[key: string]: string};
 
 // TRD: inject the HttpClient service
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private stockService: StockService) {}
 
 // TRD: In this method, we initialize the reactiveForm property with a new instance of the FormGroup class.
   ngOnInit() {
+    // ADR : new code
+    this.appState$ = this.stockService.stocks$
+      .pipe(
+        map(response => {
+          return { dataState: DataState.LOADED_STATE, appData: response }
+        }),
+        startWith({ dataState: DataState.LOADED_STATE }),
+        catchError((error: string) => {
+          return of({ dataState: DataState.ERROR_STATE, error})
+        })
+      );
+    // ADR : end new code
+
     this.reactiveForm = new FormGroup({
       investValue: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('[0-9]*')]),
       startDate: new FormControl(null, Validators.required),
