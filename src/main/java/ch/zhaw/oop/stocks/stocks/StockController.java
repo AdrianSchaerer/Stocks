@@ -1,12 +1,8 @@
 package ch.zhaw.oop.stocks.stocks;
 
-import ch.zhaw.oop.stocks.StocksApplication;
 import ch.zhaw.oop.stocks.model.Stocks;
-import ch.zhaw.oop.stocks.resource.StocksResource;
 import ch.zhaw.oop.stocks.service.implementation.StocksServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 /**

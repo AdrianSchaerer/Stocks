@@ -7,6 +7,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {StockService} from "./service/stock.service";
+import {AppState} from "./interface/app-state";
+import {CustomResponse} from "./interface/custom-response";
+import {map, Observable, of, startWith} from "rxjs";
+import {catchError} from "rxjs/operators";
+import {DataState} from "./enum/data-state.enum";
 
 
 // TRD: root component of the application
@@ -18,6 +24,8 @@ import { HttpClient } from '@angular/common/http';
 
 // TRD: implements OnInit interface to initialize the component with a form
 export class AppComponent implements OnInit {
+  appState$: Observable<AppState<CustomResponse>>;  // ADR : new code
+
   title = 'ReactiveForms';
   reactiveForm: FormGroup;
   apiResponse: any;
@@ -30,21 +38,40 @@ export class AppComponent implements OnInit {
   finalValue: number;
   gainLossValue: number;
 
+  // Adr: The availableStocks property is initialized with the data from the API.
+  availableStocks: {[key: string]: string};
 
 // TRD: inject the HttpClient service
-  constructor(private http: HttpClient) {}
-
+  constructor(private http: HttpClient, private stockService: StockService) {}
 
 // TRD: In this method, we initialize the reactiveForm property with a new instance of the FormGroup class.
   ngOnInit() {
+    // ADR : new code
+    this.appState$ = this.stockService.stocks$
+      .pipe(
+        map(response => {
+          return { dataState: DataState.LOADED_STATE, appData: response }
+        }),
+        startWith({ dataState: DataState.LOADED_STATE }),
+        catchError((error: string) => {
+          return of({ dataState: DataState.ERROR_STATE, error})
+        })
+      );
+    // ADR : end new code
+
     this.reactiveForm = new FormGroup({
       investValue: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('[0-9]*')]),
       startDate: new FormControl(null, Validators.required),
       endDate: new FormControl(null, Validators.required),
       stockName: new FormControl(null, Validators.required),
     });
+    // ADR: The availableStocks property is initialized with the data from the API.
+    this.http
+      .get('http://localhost:8080/apiStocks')
+      .subscribe((response:any) => {
+        this.availableStocks = response;
+      });
   }
-
 
 // TRD: The onSubmit method is a function that is called when the form is submitted.
   onSubmit() {
@@ -54,18 +81,6 @@ export class AppComponent implements OnInit {
       endDate: this.reactiveForm.get('endDate').value,
       stockName: this.reactiveForm.get('stockName').value,
     };
-
-
-
-    /** Replaced by the code below
-     *
-     this.http
-      .post('http://localhost:8080/stocks', formData)
-      .subscribe({
-        next: (response) => console.log(response),
-        error: (error) => console.log(error),
-      });
-     **/
 
     // TRD: Make the POST Call to the backend to get the data from the API.
     this.http
@@ -92,7 +107,6 @@ export class AppComponent implements OnInit {
     this.finalValue = response.finalValue;
     this.gainLossValue = response.gainLossValue;
 
-
     // Work with the extracted values as needed
     console.log(this.startDate);
     console.log(this.endDate);
@@ -102,17 +116,8 @@ export class AppComponent implements OnInit {
     console.log(this.investValue);
     console.log(this.finalValue);
     console.log(this.gainLossValue);
-
-    /** Not needed calculations are made in the backend
-     *
-    const profit = this.finalValue - this.investValue;
-    const roi = (profit / this.investValue) * 100;
-
-    console.log(profit);
-    console.log(roi);
-     **/
-
   }
+
 // FEM: Export the stock data to a CSV file
   exportStockData(): void {
     const apiUrl = 'http://localhost:8080/exporter/export';
@@ -145,15 +150,8 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-// Logo is loaded. If not, show headings instead:
-  isLogoLoaded = false;
 
-  hideHeadings() {
-    this.isLogoLoaded = true;
-  }
 
-  showHeadings() {
-    this.isLogoLoaded = false;
-  }
+
 }
 

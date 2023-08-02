@@ -1,31 +1,19 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
-  <div class="header">
-    <header class="header">
-      <picture>
-        <source srcset="./assets/images/logo-no-background.png" type="image/png">
-        <img class="header-logo" src="./assets/images/logo-no-background.png" alt="Stock Search Engine Logo" (load)="hideHeadings()" (error)="showHeadings()">
-      </picture>
-      <ng-container *ngIf="!isLogoLoaded">
-        <h1 class="header-title">Stock Search Engine</h1>
-        <h2 class="header-subtitle">Ugly, but it works...</h2>
-      </ng-container>
-    </header>
-  </div>
+  <app-header></app-header>
 
+<!--  <div class="left-content">-->
+<!--    <div class="ad-container">-->
+<!--      <p class="ad-description">Place your Ad here...</p>-->
+<!--      <img src="./assets/images/ad1.png" alt="Advertisement 1" class="ad-image" />-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <div class="left-content">
-    <div class="ad-container">
-      <p class="ad-description">Place your Ad here...</p>
-      <img src="./assets/images/ad1.png" alt="Advertisement 1" class="ad-image" />
-    </div>
-  </div>
-
-  <div class="right-content">
-    <div class="ad-container">
-      <p class="ad-description">Place your Ad here...</p>
-      <img src="./assets/images/ad2.jpg" alt="Advertisement 2" class="ad-image" />
-    </div>
-  </div>
+<!--  <div class="right-content">-->
+<!--    <div class="ad-container">-->
+<!--      <p class="ad-description">Place your Ad here...</p>-->
+<!--      <img src="./assets/images/ad2.jpg" alt="Advertisement 2" class="ad-image" />-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="center-content">
 
@@ -40,8 +28,10 @@
           <div>
             <span style="color: crimson" *ngIf="reactiveForm.get('investValue').invalid && reactiveForm.get('investValue').touched">Please enter a valid amount</span>
           </div>
+
           <label for="startDate">Start Date</label>
           <input type="date" min="1980-01-31" max="2999-12-31" id="startDate" name="startDate" formControlName="startDate">
+
           <div>
             <span style="color: crimson" *ngIf="reactiveForm.get('startDate').invalid && reactiveForm.get('startDate').touched">Please enter a valid date</span>
           </div>
@@ -50,57 +40,17 @@
           <div>
             <span style="color: crimson" *ngIf="reactiveForm.get('endDate').invalid && reactiveForm.get('endDate').touched">Please enter a valid date</span>
           </div>
+
           <label for="stockName">Stock <br></label>
           <select id="stockName" name="stockName" formControlName="stockName">
-            <option value="AAL">American Airlines</option>
-            <option value="AAPL">Apple</option>
-            <option value="ADBE">Adobe</option>
-            <option value="AMZN">Amazon</option>
-            <option value="BA">Boeing</option>
-            <option value="BAC">Bank of America</option>
-            <option value="CAT">Caterpillar</option>
-            <option value="C">Citigroup</option>
-            <option value="CRM">Salesforce</option>
-            <option value="CSCO">Cisco Systems</option>
-            <option value="CVX">Chevron</option>
-            <option value="DAL">Delta Air Lines</option>
-            <option value="DIS">Disney</option>
-            <option value="FB">Facebook</option>
-            <option value="FDX">FedEx</option>
-            <option value="GOOG">Google</option>
-            <option value="GS">Goldman Sachs</option>
-            <option value="HD">Home Depot</option>
-            <option value="IBM">IBM</option>
-            <option value="INTC">Intel</option>
-            <option value="JPM">JPMorgan Chase</option>
-            <option value="KO">Coca-Cola</option>
-            <option value="LMT">Lockheed Martin</option>
-            <option value="LOW">Lowe's</option>
-            <option value="MCD">McDonald's</option>
-            <option value="MMM">3M</option>
-            <option value="MRK">Merck & Co.</option>
-            <option value="MSFT">Microsoft</option>
-            <option value="NFLX">Netflix</option>
-            <option value="NKE">Nike</option>
-            <option value="NVDA">NVIDIA</option>
-            <option value="ORCL">Oracle</option>
-            <option value="PEP">PepsiCo</option>
-            <option value="PG">Procter & Gamble</option>
-            <option value="PYPL">PayPal</option>
-            <option value="SBUX">Starbucks</option>
-            <option value="T">AT&T</option>
-            <option value="TSLA">Tesla</option>
-            <option value="UAL">United Airlines</option>
-            <option value="UNH">UnitedHealth Group</option>
-            <option value="UPS">UPS</option>
-            <option value="V">Visa</option>
-            <option value="VZ">Verizon</option>
-            <option value="WFC">Wells Fargo</option>
-            <option value="WMT">Walmart</option>
-            <option value="XOM">Exxon Mobil</option>
+            <option value="default">Choose Stock</option>
+            <option *ngFor="let stock of availableStocks | keyvalue">{{stock.key}}</option>
           </select>
           <div>
             <span style="color: crimson" *ngIf="reactiveForm.get('stockName').invalid && reactiveForm.get('stockName').touched">Please choose a Stock from the List</span>
+            <span style="color: black" *ngIf="reactiveForm.get('stockName').value !== 'default' && reactiveForm.get('stockName').touched">
+              <strong>Stock Name:</strong> {{availableStocks[reactiveForm.get('stockName').value].valueOf()}}
+            </span>
           </div>
           <label for="submit"></label>
           <input type="submit" id="submit" name="stockValue">
@@ -130,7 +80,12 @@
       <br>
       <br>
       <button (click)="exportStockData()" class="button">Export CSV</button>
+      <br>
+<!--   Adr:   Table with results    -->
+      <div>Hello</div>
     </div>
+
+
 
     <!-- Not needed everything will be shown on one page
     <app-results
@@ -147,17 +102,6 @@
   </div>
 
   <!-- A Footer on the page with some information about this project -->
-  <div class="footer">
-    <div>
-      <ul>
-        <li><a href="http://localhost:4200">Home</a></li>
-      </ul>
-    </div>
-    <div>
-      <p>&copy; 2023 Stock Search project</p>
-      <p class="authors">Authors: Adrian Schärer, Dominic Troll and Manuel Ferretti</p>
-      <p class="authors">Application created as project in ZHAW CAS Object Oriented Programming.</p>
-    </div>
-  </div>
+  <app-footer></app-footer>
 
 </div>

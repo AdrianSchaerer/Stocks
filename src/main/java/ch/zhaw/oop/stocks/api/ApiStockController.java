@@ -4,8 +4,12 @@ import ch.zhaw.oop.stocks.stocks.Stock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>FEM: Invokes an API call and returns its result.</p>
@@ -17,7 +21,7 @@ import java.util.HashMap;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class ApiStockController {
-    /**
+    /*
      * The Api stock service.
      */
     ApiStockService apiStockService;
@@ -37,16 +41,27 @@ public class ApiStockController {
      *
      * @return string
      */
-// ADR: not implemented yet -> to get a list of available stocks for web
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/apiStocks")
-    public String createStock(){
+    public Map<String,String> availableStocks(){
         ApiStockDescriptionList apiStockDescriptionList = apiStockService.stocks();
+
+        // Variante 1 - HashMap
         HashMap<String,String> hashMap = new HashMap<>();
         for (ApiStockDescription apiStockDescription : apiStockDescriptionList.getData()) {
             hashMap.put(apiStockDescription.getSymbol(), apiStockDescription.getName());
         }
-        return hashMap.toString();
+        return hashMap;
+
+        // Variante 2 - List
+//        List<String> list = new ArrayList<>();
+//        for (ApiStockDescription apiStockDescription : apiStockDescriptionList.getData()) {
+////            list.add(apiStockDescription.getName());
+//            list.add(apiStockDescription.getSymbol());
+//        }
+        // return list
+
     }
+
 
 }
