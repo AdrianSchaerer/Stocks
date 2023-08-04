@@ -1,5 +1,5 @@
 export enum Status {
   ALL = 'ALL',
-  SERVER_UP = 'SERVER_UP',
-  SERVER_DOWN = 'SERVER_DOWN',
+  GAIN_POS = 'GAIN_POS',
+  GAIN_NEG = 'GAIN_NEG',
 }

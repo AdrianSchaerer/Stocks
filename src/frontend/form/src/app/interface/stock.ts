@@ -7,4 +7,5 @@ export interface Stock {
   endValue: number;
   finalValue: number;
   gainLossValue: number;
+  status: string;
 }

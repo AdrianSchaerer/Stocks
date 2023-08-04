@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 // TRD: The ResultsComponent is a child component of the AppComponent. It receives the data from the parent component and displays it in the template.
-export class ResultsComponent implements AfterViewInit {
+export class ResultsComponent {
   @Input() startDate: string;
   @Input() endDate: string;
   @Input() stockName: string;
@@ -33,14 +33,14 @@ export class ResultsComponent implements AfterViewInit {
 //  @ViewChild('chartCanvas') chartCanvas: ElementRef;
 //  private chart: Chart;
 
-  ngAfterViewInit() {
-//    this.createChart();
-    this.http
-      .get('http://localhost:8080/stocksNew/list')
-      .subscribe((response:any) => {
-        this.availableStocks = response.;
-      });
-  }
+//   ngAfterViewInit() {
+// //    this.createChart();
+//     this.http
+//       .get('http://localhost:8080/stocksNew/list')
+//       .subscribe((response:any) => {
+//         this.availableStocks = response.;
+//       });
+//   }
 
   // TRD: The createChart method creates a new Chart instance and renders it on the canvas element.
 //  private createChart() {

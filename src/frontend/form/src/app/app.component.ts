@@ -4,9 +4,9 @@
  * The code to export the stock data to a CSV file and download it, is also included in this file.
  */
 
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 import {StockService} from "./service/stock.service";
 import {AppState} from "./interface/app-state";
 import {CustomResponse} from "./interface/custom-response";
@@ -24,7 +24,8 @@ import {DataState} from "./enum/data-state.enum";
 
 // TRD: implements OnInit interface to initialize the component with a form
 export class AppComponent implements OnInit {
-  appState$: Observable<AppState<CustomResponse>>;  // ADR : new code
+
+  appState$: Observable<AppState<CustomResponse>>;
 
   title = 'ReactiveForms';
   reactiveForm: FormGroup;
@@ -39,25 +40,25 @@ export class AppComponent implements OnInit {
   gainLossValue: number;
 
   // Adr: The availableStocks property is initialized with the data from the API.
-  availableStocks: {[key: string]: string};
+  availableStocks: { [key: string]: string };
 
 // TRD: inject the HttpClient service
-  constructor(private http: HttpClient, private stockService: StockService) {}
+  constructor(private http: HttpClient, private stockService: StockService) {
+  }
 
 // TRD: In this method, we initialize the reactiveForm property with a new instance of the FormGroup class.
   ngOnInit() {
-    // ADR : new code
     this.appState$ = this.stockService.stocks$
       .pipe(
         map(response => {
           return { dataState: DataState.LOADED_STATE, appData: response }
         }),
-        startWith({ dataState: DataState.LOADED_STATE }),
+        startWith({ dataState: DataState.LOADING_STATE }),
         catchError((error: string) => {
           return of({ dataState: DataState.ERROR_STATE, error})
         })
       );
-    // ADR : end new code
+
 
     this.reactiveForm = new FormGroup({
       investValue: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('[0-9]*')]),
@@ -68,7 +69,7 @@ export class AppComponent implements OnInit {
     // ADR: The availableStocks property is initialized with the data from the API.
     this.http
       .get('http://localhost:8080/apiStocks')
-      .subscribe((response:any) => {
+      .subscribe((response: any) => {
         this.availableStocks = response;
       });
   }
@@ -121,7 +122,7 @@ export class AppComponent implements OnInit {
 // FEM: Export the stock data to a CSV file
   exportStockData(): void {
     const apiUrl = 'http://localhost:8080/exporter/export';
-    this.http.post(apiUrl, {}, { responseType: 'text' })
+    this.http.post(apiUrl, {}, {responseType: 'text'})
       .subscribe(
         (response: string) => {
           // Handle successful response here
@@ -149,8 +150,6 @@ export class AppComponent implements OnInit {
   refreshPage() {
     window.location.reload();
   }
-
-
 
 
 }
