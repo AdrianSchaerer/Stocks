@@ -9,7 +9,7 @@ import {Status} from "../enum/status.enum";
 @Injectable({providedIn: 'root'})
 export class StockService {
 
-  private readonly apiUrl = 'http://localhost:8080/StocksNew';
+  private readonly apiUrl = 'http://localhost:8080/stocksNew';
 
   constructor(private http: HttpClient) {
   }

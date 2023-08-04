@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 import static java.util.Map.*;
 
@@ -20,7 +21,8 @@ public class StocksResource {
     private final StocksServiceImpl stocksService;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getStocks() {
+    public ResponseEntity<Response> getStocks() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(3);
         return ResponseEntity.ok(
                 Response.builder()
                         .timestamp(LocalDateTime.now())

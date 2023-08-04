@@ -82,7 +82,22 @@
       <button (click)="exportStockData()" class="button">Export CSV</button>
       <br>
 <!--   Adr:   Table with results    -->
-      <div>Hello</div>
+      <div>{{ appState$ | async | json }}</div>
+
+      <ng-container >
+        <table class="table table-striped table-hover" id="stocks">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Stock Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Start Value</th>
+            <th>End Value</th>
+          </tr>
+          </thead>
+        </table>
+      </ng-container>
     </div>
 
 
